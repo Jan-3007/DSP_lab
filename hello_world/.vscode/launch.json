@@ -2,7 +2,7 @@
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
+    "version": "0.1.0",
     "configurations": [
         {
             // see https://github.com/haneefdm/cortex-debug-samples/blob/master/blink2/.vscode/launch.json
@@ -17,10 +17,6 @@
         
                 "serverpath": "C:/OpenOCD/bin/openocd.exe",
                 "searchDir": [ "C:/OpenOCD/share/openocd/scripts" ],
-
-                "configFiles": [
-                    "board/spansion_sk-fm4-176l-s6e2cc.cfg",
-                ],
             },
 
             "linux": {
@@ -29,13 +25,11 @@
         
                 "serverpath": "/usr/bin/openocd",
                 "searchDir": [ "/usr/share/openocd/scripts" ],
-
-                "configFiles": [
-                    "target/spansion_sk-fm4-176l-s6e2cc.cfg",
-                ],
             },
 
-
+            "configFiles": [
+                "board/spansion_sk-fm4-176l-s6e2cc.cfg",
+            ],
 
 
             // The following settings use commands expanded by CMake Tools extension.
