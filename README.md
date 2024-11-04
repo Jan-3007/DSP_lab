@@ -14,16 +14,23 @@ Find all documentation under "docs/". Some downloads are available under "downlo
 
 1. GCC
     - recommended release: 13.3 rel1
-    - download from website, select: Windows, AArch32 bare-metal target (arm-none-eabi)
-    - unzip and copy/move to recommended location: "C:/GCC/arm-gnu-toolchain-13.3.rel1/" 
+    - download from [website](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
+        - section: "Windows (mingw-w64-i686) hosted cross toolchains"
+        - subsection: "AArch32 bare-metal target (arm-none-eabi)"
+        - file: "arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi.zip"
+    - unzip and copy/move to recommended location: "C:/GCC/arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/" 
     - if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 1. OpenOCD 
-    - download from website
+    - download from [website](https://github.com/openocd-org/openocd/releases/tag/v0.12.0)
+        - file: "openocd-v0.12.0-i686-w64-mingw32.tar.gz"
+        - Note: version may differ
     - unzip and copy/move to recommended location: "C:/OpenOCD/"
     - if deviating, edit path in ".vscode/launch.json"
 1. CMake
     - recommended version: at least 3.20
-    - download from website
+    - download from [website](https://cmake.org/download/#latest)
+        - file: "cmake-3.30.5-windows-x86_64.zip"
+        - Note: version may differ
     - unzip and copy/move to recommended location: "C:/CMake/"
     - edit path in VS Code Settings: Cmake Path = "C:/CMake/bin/cmake.exe"
 1. Ninja
@@ -46,8 +53,11 @@ sudo apt install ninja-build
 ```
 
 To install GCC:
-- download from website, select: x86_64 Linux, AArch32 bare-metal target (arm-none-eabi)
-- unzip and copy/move folder to "/opt/" using `cp -R /opt/`
+- download from [website](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
+    - section: "x86_64 Linux hosted cross toolchains"
+    - subsection: "AArch32 bare-metal target (arm-none-eabi)"
+    - file: "arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz"
+- unzip and copy/move folder to "/opt/" using `cp -R arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi /opt/`
 - if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 
 
@@ -151,9 +161,11 @@ Refer to the file "downloads/FM4_FilterLab_1_3_Template/Eclipse_Application_Note
 
 
 
+
+
 # Download-Links
 
-check the "downloads/" folder of this sample project before downloading.
+Check the "downloads/" folder of this sample project before downloading.
 
 GCC toolchain:  
 https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
@@ -176,3 +188,8 @@ https://www.segger.com/products/debug-probes/j-link/models/other-j-links/j-link-
 J-Link Software and Documentation pack:  
 https://www.segger.com/downloads/jlink/
 
+CMSIS-DSP:  
+https://github.com/ARM-software/CMSIS-DSP
+
+CMSIS:
+https://github.com/ARM-software/CMSIS_6
