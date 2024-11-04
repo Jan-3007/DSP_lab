@@ -32,7 +32,7 @@ Find all documentation under "docs/". Some downloads are available under "downlo
         - file: "cmake-3.30.5-windows-x86_64.zip"
         - Note: version may differ
     - unzip and copy/move to recommended location: "C:/CMake/"
-    - edit path in VS Code Settings: Cmake Path = "C:/CMake/bin/cmake.exe"
+    - edit path in VS Code Settings: CMake Path = "C:/CMake/bin/cmake.exe"
 1. Ninja
     - if not installed yet, run `winget install Ninja-build.Ninja`
 1. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
