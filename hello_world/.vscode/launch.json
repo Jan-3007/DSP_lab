@@ -27,9 +27,9 @@
             },
 
 
-            "configFiles": [
-                "board/spansion_sk-fm4-176l-s6e2cc.cfg",
-            ],
+            //"configFiles": [
+            //    "board/spansion_sk-fm4-176l-s6e2cc.cfg",
+            //],
 
 
             // The following settings use commands expanded by CMake Tools extension.

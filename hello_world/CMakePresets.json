@@ -48,19 +48,16 @@
         {
             "name": "Debug",
             "configurePreset": "Debug",
-            "targets": "all",
             "verbose": false
         },
         {
             "name": "DebugNoOpt",
             "configurePreset": "DebugNoOpt",
-            "targets": "all",
             "verbose": false
         },
         {
             "name": "Release",
             "configurePreset": "Release",
-            "targets": "all",
             "verbose": false
         }
     ]
