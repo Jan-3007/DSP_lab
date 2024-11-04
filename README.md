@@ -192,5 +192,5 @@ https://www.segger.com/downloads/jlink/
 CMSIS-DSP:  
 https://github.com/ARM-software/CMSIS-DSP
 
-CMSIS:
+CMSIS:  
 https://github.com/ARM-software/CMSIS_6
