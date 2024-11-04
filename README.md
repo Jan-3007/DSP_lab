@@ -50,6 +50,7 @@ sudo apt update
 sudo apt install openocd
 sudo apt install cmake
 sudo apt install ninja-build
+sudo apt install libncursesw5
 ```
 
 To install GCC:
@@ -60,7 +61,7 @@ To install GCC:
 - unzip and copy/move folder to "/opt/" using `cp -R arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi /opt/`
 - if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 
-
+Check for connected USB devices using `lsusb`.
 
 
 
@@ -68,12 +69,12 @@ To install GCC:
 # Usage of the project
 
 - launch "hello_world.code-workspace"
-- all required extensions should load automatically
+- all required extensions should load automatically, install if prompted by VS Code
 - use "IF_DEBUG(debug_printf())" to send messages to the Serial Port Monitor
     - with "IF_DEBUG()", debug_printf() is automatically disabled in Release build
     - debug_printf() works exactly as printf()
 - add each required source file to the "target_sources" commands in "CMakeLists.txt"
-- Configure/Reconfigure and build the executable using the CMake extension
+- Configure/Reconfigure and build the executable using the __CMake__ extension
 - select "GDB debugger CMSIS-DAP" in the "Run and Debug" extension before debugging
 - start debugging with the "Run and Debug" extension.
 - open the VS Code built-in Serial Port Monitor with the correct COM port to receive messages sent via debug_printf()
