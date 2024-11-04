@@ -17,19 +17,25 @@
         
                 "serverpath": "C:/OpenOCD/bin/openocd.exe",
                 "searchDir": [ "C:/OpenOCD/share/openocd/scripts" ],
+
+                "configFiles": [
+                    "board/spansion_sk-fm4-176l-s6e2cc.cfg",
+                ],
             },
+
             "linux": {
                 // location of GDB and other tools
                 "armToolchainPath": "/opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin",
         
                 "serverpath": "/usr/bin/openocd",
                 "searchDir": [ "/usr/share/openocd/scripts" ],
+
+                "configFiles": [
+                    "target/spansion_sk-fm4-176l-s6e2cc.cfg",
+                ],
             },
 
 
-            //"configFiles": [
-            //    "board/spansion_sk-fm4-176l-s6e2cc.cfg",
-            //],
 
 
             // The following settings use commands expanded by CMake Tools extension.
