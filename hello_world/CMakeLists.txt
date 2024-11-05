@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.20)
 
 
 include(toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake)
