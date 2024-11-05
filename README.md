@@ -77,7 +77,7 @@ Check for connected USB devices using `lsusb`.
 - Configure/Reconfigure and build the executable using the __CMake__ extension
 - select "GDB debugger CMSIS-DAP" in the "Run and Debug" extension before debugging
 - start debugging with the "Run and Debug" extension.
-- open the VS Code built-in Serial Port Monitor with the correct COM port to receive messages sent via debug_printf()
+- open the Serial Port Monitor with the correct COM port to receive messages sent via debug_printf()
 
 
  
