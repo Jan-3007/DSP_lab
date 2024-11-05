@@ -39,7 +39,7 @@ Find all documentation under "docs/". Some downloads are available under "downlo
 1. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
 
-## Linux (not tested yet)
+## Linux
 
 The following is specifically for the apt package manager (tested with Ubuntu 22.04 LTS).  
 Required packages are: GCC, OpenOCD, CMake and Ninja.
