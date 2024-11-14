@@ -71,7 +71,8 @@ Check for connected USB devices using `lsusb`.
 - jumper configuration:
 	- J1, J2 open
 	- J4: 1-2
-    - J3: 2-3 
+	- J3: 2-3
+- use USB port "CN2"
 - launch "hello_world.code-workspace"
 - all required extensions should load automatically, install if prompted by VS Code
 - use "IF_DEBUG(debug_printf())" to send messages to the Serial Port Monitor
@@ -80,7 +81,7 @@ Check for connected USB devices using `lsusb`.
 - add each required source file to the "target_sources" commands in "CMakeLists.txt"
 - Configure/Reconfigure and build the executable using the __CMake__ extension
 - select "GDB debugger CMSIS-DAP" in the "Run and Debug" extension before debugging
-- start debugging with the "Run and Debug" extension.
+- start debugging with the "Run and Debug" extension
 - open the Serial Port Monitor with the correct COM port to receive messages sent via debug_printf()
 
 
