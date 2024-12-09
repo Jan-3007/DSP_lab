@@ -85,7 +85,19 @@ Check for connected USB devices using `lsusb`.
 - open the Serial Port Monitor with the correct COM port to receive messages sent via debug_printf()
 
 
- 
+
+# How to create your own project
+
+1. copy the entire project folder and rename it to your project
+2. enter your project folder
+3. open the project workspace by double-clicking "hello_world.code-workspace"
+4. open the file "CMakeLists.txt" and replace "hello_world" with your project name in the command "project()" (should be line 16)
+5. close VS Code
+6. edit the folder "hello_world" and replace the name with your project name
+7. open the file "hello_world.code-workspace" in an editor and change the value of the variable "path" to the same name of the folder from step 6
+8. edit the file name "hello_world.code-workspace" and replace "hello_world" with your own project name
+9. you are set to work on your project
+
 
 
 
