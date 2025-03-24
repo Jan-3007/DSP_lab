@@ -7,4 +7,6 @@
 [Rr]elease/
 build/
 
+#custom
+downloads/
 
