@@ -79,6 +79,11 @@ target_sources(${target_name} PRIVATE
     system/include/S6E2CCA/PDL/pdl.c
     system/include/S6E2CCA/PDL/system_s6e2cc.c
     system/include/S6E2CCA/PDL/mfs.c
+    system/include/S6E2CCA/PDL/clk.c
+    system/include/S6E2CCA/PDL/dstc.c
+    system/include/S6E2CCA/PDL/i2s.c
+    system/include/S6E2CCA/PDL/interrupts_fm4_type_b.c
+    system/include/S6E2CCA/PDL/wm8731.c
     system/include/platform/utils.c
     system/include/platform/platform.c
     )

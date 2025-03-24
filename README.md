@@ -39,7 +39,7 @@ Find all documentation under "docs/". Some downloads are available under "downlo
 1. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
 
-## Linux (not tested yet)
+## Linux
 
 The following is specifically for the apt package manager (tested with Ubuntu 22.04 LTS).  
 Required packages are: GCC, OpenOCD, CMake and Ninja.
@@ -68,6 +68,11 @@ Check for connected USB devices using `lsusb`.
 
 # Usage of the project
 
+- jumper configuration:
+	- J1, J2 open
+	- J4: 1-2
+	- J3: 2-3
+- use USB port "CN2"
 - launch "hello_world.code-workspace"
 - all required extensions should load automatically, install if prompted by VS Code
 - use "IF_DEBUG(debug_printf())" to send messages to the Serial Port Monitor
@@ -76,11 +81,23 @@ Check for connected USB devices using `lsusb`.
 - add each required source file to the "target_sources" commands in "CMakeLists.txt"
 - Configure/Reconfigure and build the executable using the __CMake__ extension
 - select "GDB debugger CMSIS-DAP" in the "Run and Debug" extension before debugging
-- start debugging with the "Run and Debug" extension.
+- start debugging with the "Run and Debug" extension
 - open the Serial Port Monitor with the correct COM port to receive messages sent via debug_printf()
 
 
- 
+
+# How to create your own project
+
+1. copy the entire project folder and rename it to your project
+2. enter your project folder
+3. open the project workspace by double-clicking "hello_world.code-workspace"
+4. open the file "CMakeLists.txt" and replace "hello_world" with your project name in the command "project()" (should be line 16)
+5. close VS Code
+6. edit the folder "hello_world" and replace the name with your project name
+7. open the file "hello_world.code-workspace" in an editor and change the value of the variable "path" to the same name of the folder from step 6
+8. edit the file name "hello_world.code-workspace" and replace "hello_world" with your own project name
+9. you are set to work on your project
+
 
 
 
@@ -94,6 +111,7 @@ Check for connected USB devices using `lsusb`.
 1. Set J1 closed
 1. Use USB CN2
 1. Plug device in, check COM Port in Device Manager
+    - if not present, run "USBVCOM Driver Installer.msi" from "downloads/FM4S6E2GMKitSetup_RevSB/"
 1. Run USBDirect, select MB9AF312K, .srec file and COM port
 1. click "Full Operation" (note: when reset required, unplug and replug USB and quickly press OK)
 1. when done, unplug USB
