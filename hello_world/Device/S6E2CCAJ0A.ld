@@ -72,11 +72,6 @@ __HEAP_SIZE  = 0x00000C00;
 
 
 
-/* ARMv8-M stack sealing:
-   to use ARMv8-M stack sealing set __STACKSEAL_SIZE to 8 otherwise keep 0
- */
-__STACKSEAL_SIZE = 0;
-
 
 MEMORY
 {
@@ -184,12 +179,6 @@ SECTIONS
     LONG (ADDR(.data))
     LONG (SIZEOF(.data) / 4)
 
-    /* Add each additional data section here */
-/*
-    LONG (LOADADDR(.data2))
-    LONG (ADDR(.data2))
-    LONG (SIZEOF(.data2) / 4)
-*/
     __copy_table_end__ = .;
   } > FLASH
 
@@ -204,13 +193,10 @@ SECTIONS
     LONG (SIZEOF(.bss) / 4)
 */
 
-    /* Add each additional bss section here */
-/*
-    LONG (ADDR(.bss2))
-    LONG (SIZEOF(.bss2) / 4)
-*/
     __zero_table_end__ = .;
   } > FLASH
+
+
 
   /*
    * This __etext variable is kept for backward compatibility with older,
@@ -255,25 +241,7 @@ SECTIONS
 
   } > RAM AT > FLASH
 
-  /*
-   * Secondary data section, optional
-   *
-   * Remember to add each additional data section
-   * to the .copy.table above to assure proper
-   * initialization during startup.
-   */
-/*
-  .data2 : ALIGN(4)
-  {
-    . = ALIGN(4);
-    __data2_start__ = .;
-    *(.data2)
-    *(.data2.*)
-    . = ALIGN(4);
-    __data2_end__ = .;
 
-  } > RAM2 AT > FLASH
-*/
 
   /* .bss section for uninitialized data */
   .bss :
@@ -288,24 +256,7 @@ SECTIONS
     __bss_end__ = .;
   } > RAM AT > RAM
 
-  /*
-   * Secondary bss section, optional
-   *
-   * Remember to add each additional bss section
-   * to the .zero.table above to assure proper
-   * initialization during startup.
-   */
-/*
-  .bss2 :
-  {
-    . = ALIGN(4);
-    __bss2_start__ = .;
-    *(.bss2)
-    *(.bss2.*)
-    . = ALIGN(4);
-    __bss2_end__ = .;
-  } > RAM2 AT > RAM2
-*/
+
 
   .heap (NOLOAD) :
   {
@@ -317,8 +268,10 @@ SECTIONS
     __HeapLimit = .;
   } > RAM
 
+
+
   /* .stack section for the stack */
-  .stack (ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE - __STACKSEAL_SIZE) (NOLOAD) :
+  .stack (ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE) (NOLOAD) :
   {
     . = ALIGN(8);
     __StackLimit = .;
@@ -327,21 +280,6 @@ SECTIONS
     __StackTop = .;
   } > RAM
   PROVIDE(__stack = __StackTop);
-
-
-
-  /* ARMv8-M stack sealing:
-     to use ARMv8-M stack sealing uncomment '.stackseal' section
-   */
-/*
-  .stackseal (ORIGIN(RAM) + LENGTH(RAM) - __STACKSEAL_SIZE) (NOLOAD) :
-  {
-    . = ALIGN(8);
-    __StackSeal = .;
-    . = . + 8;
-    . = ALIGN(8);
-  } > RAM
-*/
 
 
 
