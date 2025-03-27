@@ -50,7 +50,8 @@ target_compile_definitions(${target_name} PRIVATE ${compile_definitions} )
 target_include_directories(${target_name} PRIVATE ${include_directories} )
 
 # linker script
-set(linker_script "${CMAKE_CURRENT_LIST_DIR}/ldscripts/s6e2cca_rom.ld")
+# set(linker_script "${CMAKE_CURRENT_LIST_DIR}/ldscripts/s6e2cca_rom.ld")
+set(linker_script "${CMAKE_CURRENT_LIST_DIR}/Device/S6E2CCAJOA.ld")
 target_link_options(${target_name} PRIVATE "-T${linker_script}")
 
 # create map file (post build)
@@ -71,7 +72,8 @@ target_link_libraries(${target_name}
     
 # add startup code to the project
 target_sources(${target_name} PRIVATE
-    system/include/S6E2CCA/startup/startup_s6e2cc.S
+#    system/include/S6E2CCA/startup/startup_s6e2cc.S
+    Device/startup_S6E2CCAJOA.c
     )
 
 # add system specific source code to the project

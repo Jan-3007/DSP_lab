@@ -730,6 +730,12 @@ extern "C" {
 /* Global function prototypes ('extern', definition in C source)              */
 /******************************************************************************/
 
+/**
+  \brief Exception / Interrupt Handler Function Prototype
+  for C startup code
+*/
+typedef void(*VECTOR_TABLE_Type)(void);     // ???
+
 extern uint32_t SystemCoreClock;          // System Clock Frequency (Core Clock)
    
 extern void SystemInit (void);            // Initialize the system

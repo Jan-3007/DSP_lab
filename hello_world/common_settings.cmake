@@ -51,10 +51,35 @@ list(APPEND cpp_compile_flags "-fno-exceptions")
 list(APPEND cpp_compile_flags "-fno-rtti")
 list(APPEND cpp_compile_flags "-Wextra") # useful warnings which are not enabled via -Wall
 
+
 # linker flags (Note: cmake will pass CMAKE_CXX_FLAGS as well)
-list(APPEND linker_flags "-nostdlib")           # disable automatic linking of std libs
 list(APPEND linker_flags "-Wl,--gc-sections")   # remove unused functions and data
 list(APPEND linker_flags "-Wl,-print-memory-usage")
+#list(APPEND linker_flags "-Wl,-verbose")
+list(APPEND linker_flags "-nostdlib")           # disable automatic linking of std libs
+
+
+
+# compiler stubs
+#list(APPEND linker_libs "-lgcc")               # libgcc.a  
+
+# C runtime
+#list(APPEND linker_libs "-lc")                 # libc.a
+#list(APPEND linker_libs "-lnosys")             # libnosys.a
+
+# C++ runtime - complete
+# list(APPEND linker_libs "-lstdc++")          # libstdc++.a 
+# C++ runtime - subset (alternative)
+#list(APPEND linker_libs "-lsupc++")            # libsupc++.a 
+# math lib (optional)
+#list(APPEND linker_libs "-lm")                 # libm.a
+#list(APPEND linker_libs "crt0.o crti.o crtn.o crtbegin.o crtend.o")
+
+
+#list(JOIN linker_libs " " linker_libs_str)
+#list(APPEND linker_flags "-Wl,--start-group")
+#list(APPEND linker_flags ${linker_libs_str})
+#list(APPEND linker_flags "-Wl,--end-group")
 
 
 

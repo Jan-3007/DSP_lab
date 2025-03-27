@@ -35,8 +35,8 @@
 __ROM_BASE = 0x00000000;
 __ROM_SIZE = 0x00200000;    /* 2048 Kbytes => 2,097,152 bytes */
 
-__ROM1_BASE = 0x00406000;   /* unused */
-__ROM1_SIZE = 0x0000A000;   /* 40 Kbytes => 40,960 bytes */
+/*__ROM1_BASE = 0x00406000;*/   /* unused */
+/*__ROM1_SIZE = 0x0000A000;*/   /* 40 Kbytes => 40,960 bytes */
 
 /*--------------------- Embedded RAM Configuration ----------------------------
   <h> RAM Configuration
@@ -49,13 +49,13 @@ __ROM1_SIZE = 0x0000A000;   /* 40 Kbytes => 40,960 bytes */
   </h>
  -----------------------------------------------------------------------------*/
 __RAM_BASE = 0x1FFD0000;
-__RAM_SIZE = 0x00030000;    /* 192 Kbytes => */
+__RAM_SIZE = 0x00030000;    /* 192 Kbytes => 196,608 bytes*/
 
-__RAM1_BASE = 0x20038000;   /* unused */
-__RAM1_SIZE = 0x00008000;   /* 32 Kbytes => 32,768 bytes */
+/*__RAM1_BASE = 0x20038000;*/   /* unused */
+/*__RAM1_SIZE = 0x00008000;*/   /* 32 Kbytes => 32,768 bytes */
 
-__RAM2_BASE = 0x20040000;   /* unused */
-__RAM2_SIZE = 0x00008000;   /* 32 Kbytes => 32,768 bytes */
+/*__RAM2_BASE = 0x20040000;*/   /* unused */
+/*__RAM2_SIZE = 0x00008000;*/   /* 32 Kbytes => 32,768 bytes */
 
 /*--------------------- Stack / Heap Configuration ----------------------------
   <h> Stack / Heap Configuration
@@ -63,8 +63,8 @@ __RAM2_SIZE = 0x00008000;   /* 32 Kbytes => 32,768 bytes */
     <o1> Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
   </h>
   -----------------------------------------------------------------------------*/
-__STACK_SIZE = 0x00000400;
-__HEAP_SIZE  = 0x00000C00;
+__STACK_SIZE = 0x00000400;      /* 0x0400 => 1,024 bytes */
+__HEAP_SIZE  = 0x00000400;      /* 0x0400 => 1,024 bytes */
 
 /*
  *-------------------- <<< end of configuration section >>> -------------------
@@ -72,13 +72,33 @@ __HEAP_SIZE  = 0x00000C00;
 
 
 
+/* link libraries */
+GROUP(
+    /* mandatory libs */
+    crt0.o crti.o crtn.o crtbegin.o crtend.o
+
+    /* compiler stubs */
+    -lgcc
+
+    /* C runtime */
+    -lc
+    -lnosys
+
+    /* C++ runtime - complete */
+    -lstdc++
+    /* C++ runtime - subset (alternative) */
+    -lsupc++
+
+    /* math lib (optional) */
+    -lm
+    )
+
+
 
 MEMORY
 {
   FLASH (rx)  : ORIGIN = __ROM_BASE, LENGTH = __ROM_SIZE
-  FLASH2 (rx) : ORIGIN = __ROM1_BASE, LENGTH = __ROM1SIZE
   RAM   (rwx) : ORIGIN = __RAM_BASE, LENGTH = __RAM_SIZE
-  RAM2  (rwx) : ORIGIN = __RAM1_BASE, LENGTH = (__RAM1_SIZE + __RAM2_SIZE)
 }
 
 /* Linker script to place sections and symbol values. Should be used together
@@ -119,7 +139,7 @@ SECTIONS
   /* .text section for code and constants */
   .text :
   {
-    /* keep certain functions at the start of .text section, includes Reset_Handler */
+    /* keep vector table at the start of .text section, includes Reset_Handler */
     KEEP(*(.vectors))
     /* put all functions in the .text section */
     *(.text*)
@@ -170,7 +190,9 @@ SECTIONS
   } > FLASH
   __exidx_end = .;
 
-  .copy.table :
+
+
+  .copy.table (READONLY):   /* ??? */
   {
     . = ALIGN(4);
     __copy_table_start__ = .;
@@ -182,8 +204,9 @@ SECTIONS
     __copy_table_end__ = .;
   } > FLASH
 
-  /* set data to zero? */
-  .zero.table :
+
+
+  .zero.table (READONLY):   /* ??? */
   {
     . = ALIGN(4);
     __zero_table_start__ = .;
@@ -214,7 +237,7 @@ SECTIONS
     *(.data)
     *(.data.*)
 
-    . = ALIGN(4);
+    . = ALIGN(4);           /* ??? move to .text */
     /* preinit data */
     PROVIDE_HIDDEN (__preinit_array_start = .);
     KEEP(*(.preinit_array))
