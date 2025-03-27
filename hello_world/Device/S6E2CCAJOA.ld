@@ -63,7 +63,7 @@ __RAM_SIZE = 0x00030000;    /* 192 Kbytes => 196,608 bytes*/
     <o1> Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
   </h>
   -----------------------------------------------------------------------------*/
-__STACK_SIZE = 0x00000400;      /* 0x0400 => 1,024 bytes */
+__STACK_SIZE = 0x00002000;      /* 0x2000 => 8,192 bytes */
 __HEAP_SIZE  = 0x00000400;      /* 0x0400 => 1,024 bytes */
 
 /*
@@ -74,31 +74,32 @@ __HEAP_SIZE  = 0x00000400;      /* 0x0400 => 1,024 bytes */
 
 /* link libraries */
 GROUP(
-    /* mandatory libs */
+    /* mandatory */
     crt0.o crti.o crtn.o crtbegin.o crtend.o
 
     /* compiler stubs */
-    -lgcc
+    libgcc.a
 
     /* C runtime */
-    -lc
-    -lnosys
+    libc.a
+    libnosys.a
 
     /* C++ runtime - complete */
-    -lstdc++
+    libstdc++.a 
     /* C++ runtime - subset (alternative) */
-    -lsupc++
+    libsupc++.a
 
     /* math lib (optional) */
-    -lm
-    )
+    libm.a
+)
 
 
 
 MEMORY
 {
   FLASH (rx)  : ORIGIN = __ROM_BASE, LENGTH = __ROM_SIZE
-  RAM   (rwx) : ORIGIN = __RAM_BASE, LENGTH = __RAM_SIZE
+  RAM   (rwx) : ORIGIN = __RAM_BASE, LENGTH = (__RAM_SIZE - __STACK_SIZE)
+  STACK (rwx) : ORIGIN = (ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE), LENGTH = __STACK_SIZE
 }
 
 /* Linker script to place sections and symbol values. Should be used together
@@ -293,15 +294,15 @@ SECTIONS
 
 
 
-  /* .stack section for the stack */
-  .stack (ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE) (NOLOAD) :
+  /* .stack section for the stack, placed at the end of the RAM if calculation after .stack is active */
+  .stack /*(ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE)*/ (NOLOAD) :      /* ??? */
   {
     . = ALIGN(8);
     __StackLimit = .;
     . = . + __STACK_SIZE;
     . = ALIGN(8);
     __StackTop = .;
-  } > RAM
+  } > STACK
   PROVIDE(__stack = __StackTop);
 
 

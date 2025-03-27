@@ -1,5 +1,5 @@
 #include "global.h"
-
+/*
 #define BLOCK_SIZE            32
 #define NUM_TAPS_ARRAY_SIZE              32
 #define NUM_TAPS 5
@@ -18,7 +18,7 @@ void test_dsp_lib()
     arm_fir_instance_f32 fir_filter;
     arm_fir_init_f32(&fir_filter, NUM_TAPS, (float32_t *)&firCoeffs32[0], &firStateF32[0], BLOCK_SIZE);
 }
-
+*/
 
 
 
@@ -32,7 +32,7 @@ int main()
 
     IF_DEBUG(debug_printf("Hello World!\n"));
 
-    test_dsp_lib();
+//    test_dsp_lib();
 
     int i = 0;
     while(true)

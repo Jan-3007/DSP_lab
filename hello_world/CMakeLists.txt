@@ -8,8 +8,8 @@ include(common_settings.cmake)
 # CMSIS Core library
 set(CMSISCORE "${CMAKE_CURRENT_LIST_DIR}/CMSIS/Core")
 
-# CMSIS DSP library
-set(CMSISDSP "${CMAKE_CURRENT_LIST_DIR}/CMSIS_DSP")
+# CMSIS DSP library             temp
+#set(CMSISDSP "${CMAKE_CURRENT_LIST_DIR}/CMSIS_DSP")
 
 
 # set up project and enable languages
@@ -31,13 +31,14 @@ list(APPEND compile_definitions ${config_compile_definitions})
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}")
 list(APPEND include_directories "${CMSISCORE}/Include")
 list(APPEND include_directories "${CMSISDSP}/Include")
-list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/system/include/platform")
-list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/system/include/S6E2CCA/PDL")
+list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/device")
+list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/device/PDL")
+list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/utils")
 
 
-# build CMSIS-DSP library
-add_subdirectory("${CMSISDSP}/Source" lib_dsp)
-target_compile_definitions(CMSISDSP PRIVATE ${compile_definitions} )
+# build CMSIS-DSP library           temp
+#add_subdirectory("${CMSISDSP}/Source" lib_dsp)
+#target_compile_definitions(CMSISDSP PRIVATE ${compile_definitions} )
 
 
 #
@@ -50,8 +51,7 @@ target_compile_definitions(${target_name} PRIVATE ${compile_definitions} )
 target_include_directories(${target_name} PRIVATE ${include_directories} )
 
 # linker script
-# set(linker_script "${CMAKE_CURRENT_LIST_DIR}/ldscripts/s6e2cca_rom.ld")
-set(linker_script "${CMAKE_CURRENT_LIST_DIR}/Device/S6E2CCAJOA.ld")
+set(linker_script "${CMAKE_CURRENT_LIST_DIR}/device/S6E2CCAJOA.ld")
 target_link_options(${target_name} PRIVATE "-T${linker_script}")
 
 # create map file (post build)
@@ -64,37 +64,37 @@ add_custom_command(TARGET ${target_name} POST_BUILD
     )
 
 
-# add libs to link with
-target_link_libraries(${target_name} 
-    CMSISDSP
-    )
+# add libs to link with         temp
+#target_link_libraries(${target_name} 
+#    CMSISDSP
+#    )
 
     
 # add startup code to the project
 target_sources(${target_name} PRIVATE
-#    system/include/S6E2CCA/startup/startup_s6e2cc.S
-    Device/startup_S6E2CCAJOA.c
+    device/startup_S6E2CCAJOA.c
     )
 
 # add system specific source code to the project
 target_sources(${target_name} PRIVATE
-    system/include/S6E2CCA/PDL/pdl.c
-    system/include/S6E2CCA/PDL/system_s6e2cc.c
-    system/include/S6E2CCA/PDL/mfs.c
-    system/include/S6E2CCA/PDL/clk.c
-    system/include/S6E2CCA/PDL/dstc.c
-    system/include/S6E2CCA/PDL/i2s.c
-    system/include/S6E2CCA/PDL/interrupts_fm4_type_b.c
-    system/include/S6E2CCA/PDL/wm8731.c
-    system/include/platform/utils.c
-    system/include/platform/platform.c
+    device/PDL/pdl.c
+    device/PDL/system_s6e2cc.c
+    device/PDL/mfs.c
+    device/PDL/clk.c
+    device/PDL/dstc.c
+    device/PDL/i2s.c
+    device/PDL/interrupts_fm4_type_b.c
+    device/PDL/wm8731.c
+    device/platform.c
     )
 
 # add custom code to the project
 target_sources(${target_name} PRIVATE
-    crt_dummy_syscalls.c
+    utils/crt_dummy_syscalls.c
+    utils/utils.c
+    utils/debug_utils.cpp
     hello_world.cpp
-    debug_utils.cpp
     )
+
 
 

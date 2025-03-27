@@ -21,9 +21,6 @@ dma_rx_buffer_ping[DMA_BUFFER_SIZE];
 
 stc_dstc_des0123456_t stcDES[2];     // Instance for DSTC Descriptors 0 - 4
 
-// Create (instantiate) GUI slider data structure
-struct FM4_slider_struct FM4_GUI;
-
 
 /*  platform_init: Configures I2S, I2C and UART interfaces, CODEC, GPIOs for LED, user button and testpin.
  *  Calls various PDL drivers located in the 'PDL' include folder
@@ -74,11 +71,6 @@ void platform_init (uint32_t baud_rate, uint32_t sampleRate, audio_input audioIn
 	I2s_EnableRx (&I2S0);
 
 	I2s_Start(&I2S0);
-
-
-// Initialize the slider app  interface by setting initial float values for each of the 6 slider parameters
-	init_slider_interface(&FM4_GUI,SLIDER0, SLIDER1, SLIDER2, SLIDER3, SLIDER4, SLIDER5);
-
 }	// platform_init
 
 

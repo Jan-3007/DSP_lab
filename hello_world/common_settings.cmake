@@ -54,11 +54,13 @@ list(APPEND cpp_compile_flags "-Wextra") # useful warnings which are not enabled
 
 # linker flags (Note: cmake will pass CMAKE_CXX_FLAGS as well)
 list(APPEND linker_flags "-Wl,--gc-sections")   # remove unused functions and data
-list(APPEND linker_flags "-Wl,-print-memory-usage")
+list(APPEND linker_flags "-Wl,--print-memory-usage")
 #list(APPEND linker_flags "-Wl,-verbose")
 list(APPEND linker_flags "-nostdlib")           # disable automatic linking of std libs
 
 
+
+#list(APPEND linker_flags "-Wl,/lib/crt0.o -Wl,/lib/crti.o -Wl,/lib/crtn.o -Wl,/lib/crtbegin.o -Wl,/lib/crtend.o")
 
 # compiler stubs
 #list(APPEND linker_libs "-lgcc")               # libgcc.a  
@@ -73,7 +75,6 @@ list(APPEND linker_flags "-nostdlib")           # disable automatic linking of s
 #list(APPEND linker_libs "-lsupc++")            # libsupc++.a 
 # math lib (optional)
 #list(APPEND linker_libs "-lm")                 # libm.a
-#list(APPEND linker_libs "crt0.o crti.o crtn.o crtbegin.o crtend.o")
 
 
 #list(JOIN linker_libs " " linker_libs_str)

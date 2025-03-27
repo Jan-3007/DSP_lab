@@ -7,13 +7,13 @@
 // PDL
 extern "C"
 {
-#include <platform.h>
-#include <utils.h>
+#include "platform.h"
+#include "utils.h"
 }
 
 
 // CMSIS-DSP
-#include "arm_math.h"
+//#include "arm_math.h"
 
 
 // custom

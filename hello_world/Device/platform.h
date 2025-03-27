@@ -15,7 +15,6 @@
 #define platform_H
 
 #include <pdl_header.h>
-#include <FM4_slider_interface.h>
 
 
 // channel assignment for union audio
@@ -33,16 +32,6 @@
 #define PING 0x00
 #define PONG 0x01
 
-// initial settings for slider app
-#define BAUDRATE 460800		// UART0 baud rate used for slider app, choose an appropriate value,
-							// typical values for a pc system are 921600, 460800, 230400, 115200 etc.
-#define SLIDER4	24.0		// used for line in gain in function setLIandHPlevels; 23.0: 0 dB, max 31.0: 12 dB, min 0.0: -31.5 db; 1.5 dB steps
-#define SLIDER5	126.0		// used for HP out gain in function setLIandHPlevels; 47.0: mute, 121.0: 0 dB, max 127.0: 6 dB, min 48.0: -73 dB; 1 dB steps
-#define SLIDER0 0.0
-#define SLIDER1 0.0
-#define SLIDER2 0.0
-#define SLIDER3 0.0
-
 // Variables used for DSTC buffer handling
 extern uint32_t dma_tx_buffer_pong[DMA_BUFFER_SIZE], dma_rx_buffer_pong[DMA_BUFFER_SIZE],
 				dma_tx_buffer_ping[DMA_BUFFER_SIZE], dma_rx_buffer_ping[DMA_BUFFER_SIZE];
@@ -53,9 +42,6 @@ extern volatile boolean_t tx_buffer_empty;
 extern volatile boolean_t rx_buffer_full;
 
 extern stc_dstc_des0123456_t stcDES[2];     // Instance for DSTC Descriptors 0 - 4
-
-// Create (instantiate) GUI slider data structure
-extern struct FM4_slider_struct FM4_GUI;
 
 // union used to move the I2S data
 union audio {
