@@ -50,9 +50,39 @@ add_executable(${target_name})
 target_compile_definitions(${target_name} PRIVATE ${compile_definitions} )
 target_include_directories(${target_name} PRIVATE ${include_directories} )
 
+# generate final linker script
+add_custom_target(generated_linker_script
+  DEPENDS ${CMAKE_CURRENT_LIST_DIR}/device/S6E2CCAJOA.ld
+  )
+
+#if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
+    message(STATUS "Windows: building custom ld script")
+    add_custom_command( 
+                        OUTPUT ${CMAKE_CURRENT_LIST_DIR}/device/S6E2CCAJOA_generated.ld
+                        MAIN_DEPENDENCY ${CMAKE_CURRENT_LIST_DIR}/device/S6E2CCAJOA.ld
+                        COMMAND ${CMAKE_C_COMPILER} -E -x c -CC -I${CMAKE_CURRENT_LIST_DIR}/device S6E2CCAJOA.ld
+                        #COMMAND sh ARGS -c "gcc -E -x c -CC -I${CMAKE_CURRENT_LIST_DIR}/device S6E2CCAJOA.ld | grep -v '^#' > S6E2CCAJOA_generated.ld"
+                        WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+                        COMMENT "build preprocessed linker script"
+                        VERBATIM
+                        )
+#endif()
+if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+    message(STATUS "Linux: building custom ld script")
+    add_custom_command( OUTPUT ${CMAKE_CURRENT_LIST_DIR}/device/S6E2CCAJOA_generated.ld
+                        COMMAND bash ARGS -c "gcc -E -x c -CC -I${CMAKE_CURRENT_LIST_DIR} /device/S6E2CCAJOA.ld | grep -v '^#' > /device/S6E2CCAJOA_generated.ld"
+                        WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+                        COMMENT "build preprocessed linker script"
+                        VERBATIM
+                        )
+endif()
+
 # linker script
-set(linker_script "${CMAKE_CURRENT_LIST_DIR}/device/S6E2CCAJOA.ld")
+add_dependencies(${target_name} generated_linker_script)
+#set(linker_script "${CMAKE_CURRENT_LIST_DIR}/device/S6E2CCAJOA_generated.ld")
+set(linker_script "${CMAKE_CURRENT_LIST_DIR}/device/S6E2CCAJOA_generated2.ld")
 target_link_options(${target_name} PRIVATE "-T${linker_script}")
+
 
 # create map file (post build)
 target_link_options(${target_name} PRIVATE "-Wl,-Map=${PROJECT_NAME}.map")
@@ -60,6 +90,7 @@ target_link_options(${target_name} PRIVATE "-Wl,-Map=${PROJECT_NAME}.map")
 # create .hex file (post build)
 add_custom_command(TARGET ${target_name} POST_BUILD
     COMMAND ${CMAKE_OBJCOPY} --output-target ihex "${PROJECT_NAME}.axf" "${PROJECT_NAME}.hex"
+    COMMENT "creating .hex file"
     VERBATIM
     )
 
@@ -85,12 +116,12 @@ target_sources(${target_name} PRIVATE
     device/PDL/i2s.c
     device/PDL/interrupts_fm4_type_b.c
     device/PDL/wm8731.c
-    device/platform.c
     )
 
 # add custom code to the project
 target_sources(${target_name} PRIVATE
     utils/crt_dummy_syscalls.c
+    utils/platform.c
     utils/utils.c
     utils/debug_utils.cpp
     hello_world.cpp

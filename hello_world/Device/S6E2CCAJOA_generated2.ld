@@ -22,7 +22,7 @@
  * limitations under the License.
  */
 
-#include "device_config.h"
+
 
 /*---------------------- Flash Configuration ----------------------------------
   <h> Flash Configuration
@@ -32,8 +32,8 @@
     <o3> 2nd Flash Size (in Bytes) <0x0-0xFFFFFFFF:8>
   </h>
   -----------------------------------------------------------------------------*/
-__ROM_BASE = ROM_BASE;
-__ROM_SIZE = ROM_SIZE;
+__ROM_BASE = 0x00000000;
+__ROM_SIZE = 0x00200000;
 
 /*__ROM1_BASE = ROM1_BASE;*/   
 /*__ROM1_SIZE = ROM1_SIZE;*/   
@@ -48,8 +48,8 @@ __ROM_SIZE = ROM_SIZE;
     <o5> 3rd RAM Size (in Bytes) <0x0-0xFFFFFFFF:8>
   </h>
  -----------------------------------------------------------------------------*/
-__RAM_BASE = RAM_BASE;
-__RAM_SIZE = RAM_SIZE;    
+__RAM_BASE = 0x1FFD0000;
+__RAM_SIZE = 0x00030000;    
 
 /*__RAM1_BASE = RAM1_BASE;*/   
 /*__RAM1_SIZE = RAM1_SIZE;*/   
@@ -63,8 +63,8 @@ __RAM_SIZE = RAM_SIZE;
     <o1> Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
   </h>
   -----------------------------------------------------------------------------*/
-__STACK_SIZE = STACK_SIZE;      
-__HEAP_SIZE  = HEAP_SIZE;      
+__STACK_SIZE = 0x00001000;      
+__HEAP_SIZE  = 0x00000400;      
 
 /*
  *-------------------- <<< end of configuration section >>> -------------------
@@ -73,7 +73,7 @@ __HEAP_SIZE  = HEAP_SIZE;
 
 
 /* link libraries */
-GROUP(LINKER_LIBS)
+GROUP(crt0.o crti.o crtn.o crtbegin.o crtend.o libgcc.a libc.a libnosys.a libsupc++.a libm.a)
 
 
 

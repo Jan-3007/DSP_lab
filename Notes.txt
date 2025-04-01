@@ -1,0 +1,120 @@
+MCU: FM4 S6E2CCAJ0A
+
+
+
+VSCode extensions?
+Arm Debugger
+Arm Embedded Debugger
+Arm CMSIS Debugger
+Arm Cortex Analysis
+
+cortex-debug
+for launch.json:
+   {
+        "cwd": "${workspaceRoot}",
+        "executable": "${command:cmsis-csolution.getBinaryFiles}",
+        "name": "Debug with OpenOCD",
+        "request": "launch",
+        "type": "cortex-debug",
+        "servertype": "openocd",
+        "configFiles": [ "openocd.cfg" ],
+        "searchDir": [],
+        "runToEntryPoint": "main",
+        "showDevDebugOutput": "none"
+    }
+
+
+
+
+
+
+
+https://interrupt.memfault.com/blog/how-to-write-linker-scripts-for-firmware
+https://interrupt.memfault.com/blog/arm-cortex-m-exceptions-and-nvic
+
+
+
+Linker Script:
+.text for code & constants
+.bss for uninitialized data
+.stack for our stack
+.data for initialized data
+
+
+. is the location counter, track current offset into given memory region
+
+
+
+welche libs sollen vom Linker verwendet werden?
+	- libgcc.a, libc.a, libsupc++.a, libnosys.a, libm.a
+
+warum --nostdlib?
+
+
+_start supplied by libc. is necessary for startup
+
+
+
+
+
+
+
+statup code
+
+https://allthingsembedded.com/post/2019-01-03-arm-cortex-m-startup-code-for-c-and-c/
+
+
+
+
+more links:
+http://www.unixwiz.net/techtips/gnu-c-attributes.html
+
+https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/writing-your-own-startup-code-for-cortex-m
+
+https://www.iotality.com/arm-cortex-m4-startup-code/
+
+https://medium.com/@csrohit/stm32-startup-script-in-c-b01e47c55179
+
+https://allthingsembedded.com/post/2019-01-03-arm-cortex-m-startup-code-for-c-and-c/
+
+https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/decoding-the-startup-file-for-arm-cortex-m4
+
+https://interrupt.memfault.com/blog/arm-cortex-m-exceptions-and-nvic
+
+https://www.embeddedrelated.com/showarticle/878.php
+
+https://developer.arm.com/documentation/ka004825/latest/
+
+https://embeddedartistry.com/blog/2019/04/17/exploring-startup-implementations-newlib-arm/
+
+https://embeddedartistry.com/blog/2019/04/08/a-general-overview-of-what-happens-before-main/
+
+https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+
+https://www.learncpp.com/cpp-tutorial/introduction-to-the-compiler-linker-and-libraries/
+
+https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html
+
+https://sourceware.org/binutils/docs/ld/MEMORY.html#MEMORY
+
+https://interrupt.memfault.com/blog/how-to-write-linker-scripts-for-firmware
+
+https://interrupt.memfault.com/blog/boostrapping-libc-with-newlib
+
+https://interrupt.memfault.com/blog/zero-to-main-1
+
+https://arm-software.github.io/CMSIS_6/latest/Core/using_pg.html#using_arm
+
+https://arm-software.github.io/CMSIS_6/latest/Core/using_pg.html#using_vtor
+
+https://arm-software.github.io/CMSIS_6/latest/Core/using_pg.html
+
+
+
+
+
+
+on arch Linux
+path: /usr/bin
+
+pkgs: arm-none-eabi-(gcc, binutils, newlib)
