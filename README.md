@@ -61,6 +61,16 @@ To install GCC:
 - unzip and copy/move folder to "/opt/" using `cp -R arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi /opt/`
 - if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 
+For Arch Linux:
+```
+pacman -Ss openocd
+pacman -Ss cmake
+pacman -Ss ninja
+pacman -Ss arm-none-eabi-gcc
+pacman -Ss arm-none-eabi-newlib
+```
+
+
 Check for connected USB devices using `lsusb`.
 
 
