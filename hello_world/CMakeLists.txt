@@ -31,7 +31,6 @@ list(APPEND compile_definitions ${config_compile_definitions})
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}")
 list(APPEND include_directories "${CMSISCORE}/Include")
 list(APPEND include_directories "${CMSISDSP}/Include")
-list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/device")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/device/PDL")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/utils")
 
@@ -85,12 +84,13 @@ target_sources(${target_name} PRIVATE
     device/PDL/i2s.c
     device/PDL/interrupts_fm4_type_b.c
     device/PDL/wm8731.c
-    device/platform.c
+
     )
 
 # add custom code to the project
 target_sources(${target_name} PRIVATE
     utils/crt_dummy_syscalls.c
+    utils/platform.c
     utils/utils.c
     utils/debug_utils.cpp
     hello_world.cpp
