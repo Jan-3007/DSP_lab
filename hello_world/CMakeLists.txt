@@ -31,7 +31,7 @@ list(APPEND compile_definitions ${config_compile_definitions})
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}")
 list(APPEND include_directories "${CMSISCORE}/Include")
 list(APPEND include_directories "${CMSISDSP}/Include")
-list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/device/PDL")
+list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/PDL")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/utils")
 
 
@@ -76,15 +76,14 @@ target_sources(${target_name} PRIVATE
 
 # add system specific source code to the project
 target_sources(${target_name} PRIVATE
-    device/PDL/pdl.c
-    device/PDL/system_s6e2cc.c
-    device/PDL/mfs.c
-    device/PDL/clk.c
-    device/PDL/dstc.c
-    device/PDL/i2s.c
-    device/PDL/interrupts_fm4_type_b.c
-    device/PDL/wm8731.c
-
+    PDL/pdl.c
+    PDL/system_s6e2cc.c
+    PDL/mfs.c
+    PDL/clk.c
+    PDL/dstc.c
+    PDL/i2s.c
+    PDL/interrupts_fm4_type_b.c
+    PDL/wm8731.c
     )
 
 # add custom code to the project

@@ -58,32 +58,6 @@ list(APPEND linker_flags "-Wl,--print-memory-usage")
 #list(APPEND linker_flags "-Wl,-verbose")
 list(APPEND linker_flags "-nostdlib")           # disable automatic linking of std libs
 
-
-
-#list(APPEND linker_flags "-Wl,/lib/crt0.o -Wl,/lib/crti.o -Wl,/lib/crtn.o -Wl,/lib/crtbegin.o -Wl,/lib/crtend.o")
-
-# compiler stubs
-#list(APPEND linker_libs "-lgcc")               # libgcc.a  
-
-# C runtime
-#list(APPEND linker_libs "-lc")                 # libc.a
-#list(APPEND linker_libs "-lnosys")             # libnosys.a
-
-# C++ runtime - complete
-# list(APPEND linker_libs "-lstdc++")          # libstdc++.a 
-# C++ runtime - subset (alternative)
-#list(APPEND linker_libs "-lsupc++")            # libsupc++.a 
-# math lib (optional)
-#list(APPEND linker_libs "-lm")                 # libm.a
-
-
-#list(JOIN linker_libs " " linker_libs_str)
-#list(APPEND linker_flags "-Wl,--start-group")
-#list(APPEND linker_flags ${linker_libs_str})
-#list(APPEND linker_flags "-Wl,--end-group")
-
-
-
 # clear out default flags
 set(CMAKE_ASM_FLAGS         "" CACHE INTERNAL "")
 set(CMAKE_ASM_FLAGS_DEBUG   "" CACHE INTERNAL "")
