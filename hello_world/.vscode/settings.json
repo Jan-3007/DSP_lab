@@ -1,0 +1,13 @@
+{
+    "cmake.cmakePath": "C:/CMake/bin/cmake.exe",
+    "cmake.automaticReconfigure": false,
+    "cmake.configureOnEdit": false,
+    "cmake.configureOnOpen": false,
+    "cmake.deleteBuildDirOnCleanConfigure": true,
+    "cmake.pinnedCommands": [
+    "workbench.action.tasks.configureTaskRunner",
+    "workbench.action.tasks.runTask"
+    ],
+}
+
+
