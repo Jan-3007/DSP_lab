@@ -1,6 +1,5 @@
 #include "global.h"
 /*
-#define BLOCK_SIZE            32
 #define NUM_TAPS_ARRAY_SIZE              32
 #define NUM_TAPS 5
 
@@ -25,11 +24,11 @@ void test_dsp_lib()
 
 int main()
 {
-    // GPIO port configuration for 3 color LED, user button and test pin
-	init_gpio();
+    // initialze whole platform
+    init_platform(115200, hz32000, line_in, get_new_tx_buffer_ptr(), get_new_rx_buffer_ptr());
 
-    IF_DEBUG(init_uart0(115200));
 
+    // function calls surrounded by IF_DEBUG() will be removed when building a release
     IF_DEBUG(debug_printf("Hello World!\n"));
 
 //    test_dsp_lib();

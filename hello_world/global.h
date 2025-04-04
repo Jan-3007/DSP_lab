@@ -4,10 +4,6 @@
 #include <stdio.h>
 
 
-// custom config
-#include "hello_world_config.h"
-
-
 // PDL
 #include "pdl_header.h"
 
@@ -19,6 +15,9 @@
 // CMSIS-DSP
 //#include "arm_math.h"
 
+
+// custom config
+#include "hello_world_config.h"
 
 // custom
 #include "debug_utils.h"

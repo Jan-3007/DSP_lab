@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "hello_world_config.h"
+
 // This enum describes some gpio resources on the FM4 pioneer platform
 typedef enum
 {
