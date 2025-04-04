@@ -5,30 +5,33 @@
  *      Author: Thomas Erforth
  */
 
-#ifndef SYSTEM_INCLUDE_PLATFORM_UTILS_H_
-#define SYSTEM_INCLUDE_PLATFORM_UTILS_H_
-
-#include <pdl_header.h>
-
-#define CLK_FREQ 200000000UL
+#pragma once
 
 // This enum describes some gpio resources on the FM4 pioneer platform
- typedef enum
- {
-	 LED_R,
-	 LED_G,
-	 LED_B,
-	 TEST_PIN,
-	 USER_BUTTON
- } userGPIO;
+typedef enum
+{
+    LED_R,
+    LED_G,
+    LED_B,
+    TEST_PIN,
+    USER_BUTTON
+} user_gpio;
 
-// prototypes
-void gpio_set(userGPIO, uint8_t);
-uint8_t gpio_get(userGPIO gpio);
-void writeUart0(uint8_t message[]);
-short prbs(void);
+void gpio_set(
+    user_gpio gpio, 
+    uint8_t level
+    );
+
+uint8_t gpio_get(user_gpio gpio);
+
 void delay_ms(unsigned int ms);
+
 void delay_us(unsigned int us);
+
 void delay_cycles(unsigned int cycles);
 
-#endif /* SYSTEM_INCLUDE_PLATFORM_UTILS_H_ */
+
+// for the pseudo random sequence generator
+#define NOISELEVEL 8000
+
+short pseudo_random_sequence_generator(void);

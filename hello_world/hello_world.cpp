@@ -26,9 +26,9 @@ void test_dsp_lib()
 int main()
 {
     // GPIO port configuration for 3 color LED, user button and test pin
-	GpioInit();
+	init_gpio();
 
-    IF_DEBUG(Uart0Init(115200));
+    IF_DEBUG(init_uart0(115200));
 
     IF_DEBUG(debug_printf("Hello World!\n"));
 
@@ -49,3 +49,22 @@ int main()
     return 0;
 }
 
+
+
+// to be implemented by user
+uint32_t* get_new_tx_buffer_ptr()
+{
+    // replace nullptr with your own function
+    uint32_t* ptr = nullptr;
+
+    return ptr;
+}
+
+// to be implemented by user
+uint32_t* get_new_rx_buffer_ptr()
+{
+    // replace nullptr with your own function
+    uint32_t* ptr = nullptr;
+
+    return ptr;
+}

@@ -89,8 +89,8 @@ target_sources(${target_name} PRIVATE
 # add custom code to the project
 target_sources(${target_name} PRIVATE
     utils/crt_dummy_syscalls.c
-    utils/platform.c
-    utils/utils.c
+    utils/platform.cpp
+    utils/utils.cpp
     utils/debug_utils.cpp
     hello_world.cpp
     )

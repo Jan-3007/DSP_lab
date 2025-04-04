@@ -6,16 +6,13 @@
  *      Author: Thomas Erforth
  */
 
-#include "utils.h"
+#include "global.h"
 
-#define NOISELEVEL 8000 // pseudo random generation
-
-
-
-/* gpio_set: Sets the output level for the 3 color LED and the testpin
+/* 
+ * Sets the output level for the 3 color LED and the testpin
  * Eases the use of the PDL gpio macros
  */
-void gpio_set(userGPIO gpio, uint8_t level)
+void gpio_set(user_gpio gpio, uint8_t level)
 {
 	switch (gpio)
 	{
@@ -25,13 +22,14 @@ void gpio_set(userGPIO gpio, uint8_t level)
 		case LED_B:		Gpio1pin_Put(GPIO1PIN_P18, level); break;
 		case USER_BUTTON: break;		// is input, no need to set
 	}
-}  // gpio_set
+}
 
 
-/* gpio_get: Return the input level
+/* 
+ * Return the input level
  * Eases the use of the PDL gpio macros
  */
-uint8_t gpio_get(userGPIO gpio)
+uint8_t gpio_get(user_gpio gpio)
 {
 	switch (gpio)
 	{
@@ -46,30 +44,14 @@ uint8_t gpio_get(userGPIO gpio)
 } // gpio_get
 
 
-/* write_uart0: Simply transmits a string to UART0 transmit buffer
- *
- */
-void writeUart0(uint8_t message[])
-{
-	uint8_t u8Cnt = 0;
-
-	while(message[u8Cnt] != 0x0)
-	    {
-	        while (TRUE != Mfs_Uart_GetStatus(&UART0, UartTxEmpty)); //wait until TX buffer empty
-	        Mfs_Uart_SendData(&UART0, message[u8Cnt]);
-
-	        u8Cnt++;
-	    }
-} // write_uart0
-
-
-/* prbs: gen pseudo-random sequence {-1,1}
+/* 
+ * pseudo-random sequence generator {-1,1}
  * copyright ARM University Program &copy; ARM Ltd 2015.
  */
 
-short prbs(void) 			     			  		//gen pseudo-random sequence {-1,1}
+short pseudo_random_sequence_generator(void)
 {
-	typedef struct BITVAL    // used in function prbs()
+	typedef struct BITVAL
 	{
 	 unsigned short b0:1, b1:1, b2:1, b3:1, b4:1, b5:1, b6:1;
 	 unsigned short b7:1, b8:1, b9:1, b10:1, b11:1, b12:1,b13:1;
@@ -105,30 +87,34 @@ short prbs(void) 			     			  		//gen pseudo-random sequence {-1,1}
  * copyright ARM University Program &copy; ARM Ltd 2014.
  */
 
-void delay_ms(unsigned int ms) {
- unsigned int max_step = 1000 * (UINT32_MAX / CLK_FREQ);
- unsigned int max_sleep_cycles = max_step * (CLK_FREQ / 1000);
- while (ms > max_step) {
-  ms -= max_step;
-  delay_cycles(max_sleep_cycles);
- }
- delay_cycles(ms * (CLK_FREQ / 1000));
+void delay_ms(unsigned int ms) 
+{
+    unsigned int max_step = 1000 * (UINT32_MAX / SystemCoreClock);
+    unsigned int max_sleep_cycles = max_step * (SystemCoreClock / 1000);
+    while (ms > max_step) 
+    {
+        ms -= max_step;
+        delay_cycles(max_sleep_cycles);
+    }
+    delay_cycles(ms * (SystemCoreClock / 1000));
 }
 
-void delay_us(unsigned int us) {
- unsigned int max_step = 1000000 * (UINT32_MAX / CLK_FREQ);
- unsigned int max_sleep_cycles = max_step * (CLK_FREQ / 1000000);
- while (us > max_step) {
-  us -= max_step;
-  delay_cycles(max_sleep_cycles);
- }
- delay_cycles(us * (CLK_FREQ / 1000000));
+void delay_us(unsigned int us) 
+{
+    unsigned int max_step = 1000000 * (UINT32_MAX / SystemCoreClock);
+    unsigned int max_sleep_cycles = max_step * (SystemCoreClock / 1000000);
+    while (us > max_step) 
+    {
+        us -= max_step;
+        delay_cycles(max_sleep_cycles);
+    }
+    delay_cycles(us * (SystemCoreClock / 1000000));
 }
 
 
 #pragma GCC push_options
 #pragma GCC optimize ("O0")
-void delay_cycles(unsigned int cycles)
+void delay_cycles(unsigned int cycles)      // ???
 {
 	asm("LSRS r0, #2");
 	asm("BEQ done");
