@@ -21,7 +21,8 @@ if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
 endif()
 if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
     message(STATUS "OS: Linux")
-    set(GCC_ARM_V13_3_R1_ROOT "/opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi")
+#    set(GCC_ARM_V13_3_R1_ROOT "/opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi")
+    set(GCC_ARM_V13_3_R1_ROOT "/usr/bin")
 endif()
 
 
