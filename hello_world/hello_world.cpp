@@ -51,6 +51,7 @@ int main()
 
 
 // to be implemented by user
+// prototype defined in platform.h
 uint32_t* get_new_tx_buffer_ptr()
 {
     // replace nullptr with your own function
@@ -60,6 +61,7 @@ uint32_t* get_new_tx_buffer_ptr()
 }
 
 // to be implemented by user
+// prototype defined in platform.h
 uint32_t* get_new_rx_buffer_ptr()
 {
     // replace nullptr with your own function
