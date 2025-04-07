@@ -5,6 +5,8 @@
     "cmake.deleteBuildDirOnCleanConfigure": true,
     "cmake.clearOutputBeforeBuild": false,
     "cmake.saveBeforeBuild": true
+
+    ,"cmake.cmakePath": "C:/CMake/bin/cmake.exe"
 }
 
 
