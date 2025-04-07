@@ -14,4 +14,7 @@
 
 
 
+// FiFo Buffer
+#define FIFO_SIZE_BLOCKS 3
+
 

@@ -34,9 +34,7 @@ typedef enum
 void init_platform (
     uint32_t baud_rate, 
     sampling_rate sample_rate, 
-    audio_input audio_in, 
-    uint32_t tx_initial_buffer[BLOCK_SIZE], 
-    uint32_t rx_initial_buffer[BLOCK_SIZE]
+    audio_input audio_in
     );
 
 void init_uart0(
@@ -54,10 +52,7 @@ void init_I2S0(
     sampling_rate sample_rate
     );
 
-void init_dstc(
-    uint32_t tx_initial_buffer[BLOCK_SIZE], 
-    uint32_t rx_initial_buffer[BLOCK_SIZE]
-    );
+void init_dstc();
 
 void isr_tx();
 void isr_rx();
@@ -78,5 +73,18 @@ void convert_audio_sample_to_2ch(
 {
     *left_sample = static_cast<int16_t>(*audio_sample >> 16);
     *right_sample = static_cast<int16_t>(*audio_sample);
+}
+
+// Converts two int16_t audio samples (left and right audio channel) into a uint32_t audio sample
+inline
+void convert_2ch_to_audio_sample(
+    int16_t* left_sample,           // input
+    int16_t* right_sample,          // input
+    uint32_t* audio_sample          // output
+    )
+{
+    uint32_t left_temp = static_cast<uint32_t>(*left_sample);
+    uint32_t right_temp = static_cast<uint32_t>(*right_sample);
+    *audio_sample = (left_temp << 16) | right_temp;
 }
 

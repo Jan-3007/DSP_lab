@@ -26,9 +26,7 @@
 void init_platform(
     uint32_t baud_rate, 
     sampling_rate sample_rate, 
-    audio_input audio_in, 
-    uint32_t tx_initial_buffer[BLOCK_SIZE], 
-    uint32_t rx_initial_buffer[BLOCK_SIZE]
+    audio_input audio_in
     )
 {
 // GPIO port configuration for 3 color LED, user button and test pin
@@ -46,7 +44,7 @@ void init_platform(
 	//DSTC module initialization functions;
 	//Configures DSTC channel 0 to transfer data from memory to I2S TX,
 	// and channel 1 from I2S RX to memory.
-	init_dstc(tx_initial_buffer, rx_initial_buffer);
+	init_dstc();
 
 	I2s_StartClk(&I2S0);						// I2SEN = 1, clock to I2S macro disabled
 
@@ -103,10 +101,7 @@ stc_dstc_des0123456_t stcDES[2];     // Instance for DSTC Descriptors 0 - 4
 /* 
  * Configures DSTC channel 0 to transfer data from memory to I2S TX, and channel 1 from I2S RX to memory.
  */
-void init_dstc(
-    uint32_t tx_initial_buffer[BLOCK_SIZE], 
-    uint32_t rx_initial_buffer[BLOCK_SIZE]
-    )
+void init_dstc()
 {
 	stc_dstc_config_t stcDstcConfig;	// DSTC config structure
 
@@ -141,7 +136,7 @@ void init_dstc(
 	stcDES[0].DES1_mode1.IRM = stcDES[0].DES1_mode1.IIN;			// Same as IIN
 
 	// CH0, DES2
-	stcDES[0].DES2 = (uint32_t)&tx_initial_buffer ;   	// Source address (incremented by TW * 1 for every transfer. Configured in DES0.SAC)
+	stcDES[0].DES2 = (uint32_t)get_new_tx_buffer_ptr() ;   	// Source address (incremented by TW * 1 for every transfer. Configured in DES0.SAC)
 
 	// CH0, DES3
 	stcDES[0].DES3 = (uint32_t)&FM4_I2S0->TXFDAT;      	// Destination address - I2S Transmission data register (Same for every transfer,
@@ -179,7 +174,7 @@ void init_dstc(
 	stcDES[1].DES2 = (uint32_t)&FM4_I2S0->RXFDAT ;     	// Source address
 
 	// CH1, DES3
-	stcDES[1].DES3 = (uint32_t)&rx_initial_buffer;   	// Destination address - I2S Transmission data register (Same for every transfer. Configured in DES0.DAC)
+	stcDES[1].DES3 = (uint32_t)get_new_rx_buffer_ptr();   	// Destination address - I2S Transmission data register (Same for every transfer. Configured in DES0.DAC)
 
 	// CH1, DES4
 	stcDES[1].DES4_mode1 = stcDES[1].DES1_mode1;      	// used to reload DES1

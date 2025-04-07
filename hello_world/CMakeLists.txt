@@ -93,6 +93,7 @@ target_sources(${target_name} PRIVATE
     utils/utils.cpp
     utils/debug_utils.cpp
     hello_world.cpp
+    hello_world_buffer.cpp
     )
 
 

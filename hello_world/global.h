@@ -2,6 +2,7 @@
 
 // C++
 #include <stdio.h>
+#include <cstring>
 
 
 // PDL
@@ -16,8 +17,9 @@
 //#include "arm_math.h"
 
 
-// custom config
-#include "hello_world_config.h"
 
 // custom
+#include "hello_world_config.h"
 #include "debug_utils.h"
+#include "hello_world_buffer.h"
+
