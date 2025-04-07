@@ -22,7 +22,7 @@ void test_dsp_lib()
 
 
 
-void main()
+int main()
 {
     // initialze whole platform
     init_platform(115200, hz32000, line_in);
@@ -84,6 +84,8 @@ void main()
 
     // fail save, never return from main on a microcontroller
     fatal_error();
+
+    return 0;
 }
 
 

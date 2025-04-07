@@ -11,8 +11,8 @@ uint32_t tx_buffer[BUFFER_SIZE];
 
 // read and write offsets
 uint32_t rx_read_offset = 0;
-uint32_t rx_write_offset = 1;
-uint32_t tx_read_offset = 1;
+uint32_t rx_write_offset = 0;
+uint32_t tx_read_offset = 0;
 uint32_t tx_write_offset = 0;
 
 
@@ -21,8 +21,8 @@ void init_buffer()
     rx_write_offset = 1;
     tx_read_offset = 1;
 
-    memset(rx_buffer, 0, BUFFER_SIZE);
-    memset(tx_buffer, 0, BUFFER_SIZE);
+    memset(rx_buffer, 0, sizeof(rx_buffer));
+    memset(tx_buffer, 0, sizeof(tx_buffer));
 }
 
 
