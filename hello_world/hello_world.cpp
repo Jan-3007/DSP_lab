@@ -24,7 +24,9 @@ void test_dsp_lib()
 
 int main()
 {
-    // initialze whole platform
+    init_buffer();
+
+    // initialze whole platform, starts DMA, call as last init
     init_platform(115200, hz32000, line_in);
 
 
