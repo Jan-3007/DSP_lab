@@ -96,19 +96,13 @@ int main()
 // get new memory address to read from and send data to DAC
 uint32_t* get_new_tx_buffer_ptr()
 {
-    // replace nullptr with your own function
-    uint32_t* ptr = tx_buffer_get_read_ptr();
-
-    return ptr;
+    return tx_buffer_get_read_ptr();;
 }
 
 // prototype defined in platform.h
 // get new memory address to write new data from ADC
 uint32_t* get_new_rx_buffer_ptr()
 {
-    // replace nullptr with your own function
-    uint32_t* ptr = rx_buffer_get_write_ptr();
-
-    return ptr;
+    return rx_buffer_get_write_ptr();;
 }
 
