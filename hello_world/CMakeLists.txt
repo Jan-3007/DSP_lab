@@ -38,6 +38,7 @@ list(APPEND include_directories "${CMSISCORE}/Include")
 list(APPEND include_directories "${CMSISDSP}/Include")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/PDL")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/utils")
+list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/device")
 
 
 # build CMSIS-DSP library           temp
