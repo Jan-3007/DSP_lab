@@ -58,8 +58,6 @@ list(APPEND linker_flags "-Wl,--print-memory-usage")
 #list(APPEND linker_flags "-Wl,-verbose")
 list(APPEND linker_flags "-nostdlib")           # disable automatic linking of std libs
 
-
-
 # clear out default flags
 set(CMAKE_ASM_FLAGS         "" CACHE INTERNAL "")
 set(CMAKE_ASM_FLAGS_DEBUG   "" CACHE INTERNAL "")

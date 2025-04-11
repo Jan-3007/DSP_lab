@@ -1,0 +1,12 @@
+{
+    "cmake.automaticReconfigure": false,
+    "cmake.configureOnEdit": false,
+    "cmake.configureOnOpen": false,
+    "cmake.deleteBuildDirOnCleanConfigure": true,
+    "cmake.clearOutputBeforeBuild": false,
+    "cmake.saveBeforeBuild": true
+
+    ,"cmake.cmakePath": "C:/CMake/bin/cmake.exe"
+}
+
+

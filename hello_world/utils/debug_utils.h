@@ -14,3 +14,6 @@ void debug_printf(const char* fmt, ...);
 #define IF_DEBUG(x)
 #endif
 
+
+
+void fatal_error();

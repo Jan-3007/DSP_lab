@@ -29,3 +29,18 @@ void debug_printf(const char* fmt, ...)
 }
 
 
+
+void
+fatal_error()
+{
+    // LED_G off
+    gpio_set(LED_G, HIGH);
+    // LED_B off
+    gpio_set(LED_B, HIGH);
+    // LED_R on
+	gpio_set(LED_R, LOW);	
+
+    IF_DEBUG(debug_printf("FATAL ERROR"));
+
+    while(true);
+}

@@ -10,3 +10,6 @@ build/
 #custom
 downloads/
 
+hello_world/device/S6E2CCAJOA.ld
+*.ld
+hello_world/utils/platform.c

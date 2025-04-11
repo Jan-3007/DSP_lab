@@ -10,82 +10,81 @@
  * 					   Define directive for PING / PONG added
  *
  */
+#pragma once
 
-#ifndef platform_H
-#define platform_H
-
-#include <pdl_header.h>
-
-
-// channel assignment for union audio
-#define LEFT 1
-#define RIGHT 0
-
-// GPIO
-#define HIGH 1
-#define LOW 0
-#define ENABLE 1
-#define DISABLE 0
-
-// DMA with DSTC
-#define DMA_BUFFER_SIZE 512 // 1 - 256 and multiples of 256 (e.g. 512, 768, 1024, ...)
-#define PING 0x00
-#define PONG 0x01
-
-// Variables used for DSTC buffer handling
-extern uint32_t dma_tx_buffer_pong[DMA_BUFFER_SIZE], dma_rx_buffer_pong[DMA_BUFFER_SIZE],
-				dma_tx_buffer_ping[DMA_BUFFER_SIZE], dma_rx_buffer_ping[DMA_BUFFER_SIZE];
-
-extern volatile uint8_t rx_proc_buffer;
-extern volatile uint8_t tx_proc_buffer;
-extern volatile boolean_t tx_buffer_empty;
-extern volatile boolean_t rx_buffer_full;
-
-extern stc_dstc_des0123456_t stcDES[2];     // Instance for DSTC Descriptors 0 - 4
-
-// union used to move the I2S data
-union audio {
-	int32_t audioSample;
-	int16_t audio_ch[2];
-};
-
+#include "hello_world_config.h"
 
 /*! This enum describes the different sampling frequency setup of the CODEC */
 typedef enum
 {
-	hz48000 = 0x00,  // 48kHz from 12.288MHz MCLK
     hz8000 	= 0x0C,  // 8kHz from 12.288MHz MCLK
     hz32000 = 0x18,  // 32kHz from 12.288MHz MCLK
+	hz48000 = 0x00,  // 48kHz from 12.288MHz MCLK
     hz96000 = 0x1C,  // 96kHz from 12.288MHz MCLK
 } sampling_rate;
 
-/*! This enum describes the different input setup of the CODEC */		
+/*! This enum describes the different input audio jacks of the CODEC */		
 typedef enum
 {
-	line_in = 0x12,  // Select DAC input Line In and disable bypass
-    mic_in 	= 0x15,  // Select DAC input Microphone In and disable bypass
+	line_in = 0x12,  // Select Line In and disable bypass
+    mic_in 	= 0x15,  // Select Microphone In and disable bypass
 } audio_input;
 
-/*! This enum describes the different operating modes of the I2S interface */
-typedef enum
+
+void init_platform (
+    uint32_t baud_rate, 
+    sampling_rate sample_rate, 
+    audio_input audio_in
+    );
+
+void init_uart0(
+    uint32_t baud_rate
+    );
+
+void init_codec(
+    sampling_rate codec_sample_rate, 
+    audio_input audio_in
+    );
+
+void init_gpio(void);
+
+void init_I2S0(
+    sampling_rate sample_rate
+    );
+
+void init_dstc();
+
+void isr_tx();
+void isr_rx();
+
+// to be implemented by user
+extern uint32_t* get_new_tx_buffer_ptr();
+extern uint32_t* get_new_rx_buffer_ptr();
+
+
+
+// Converts a uint32_t audio sample into two int16_t audio samples (left and right audio channel)
+inline
+void convert_audio_sample_to_2ch(
+    uint32_t* audio_sample,         // input
+    int16_t* left_sample,           // output
+    int16_t* right_sample           // output
+    )
 {
-	intr 	= 0x00,     // User I2S interruptions to control the flow of the program (generate interruption when  irq_depth=<FIFO level)
-    dma		= 0x01,     // Use DMA requests to control the flow of the program (generate a request when dma_depth=<FIFO level)
-	poll	= 0x02,		// polling, no interrupts used
-} mode;
+    *left_sample = static_cast<int16_t>(*audio_sample >> 16);
+    *right_sample = static_cast<int16_t>(*audio_sample);
+}
 
-
-/* Prototypes */
-
-void platform_init (uint32_t, uint32_t, audio_input, mode, void (*)(void), void (*)(void));
-void Uart0Init(uint32_t);
-void CodecInit(sampling_rate, audio_input);
-void GpioInit(void);
-void I2S0Init(sampling_rate, mode, void (*)(void));
-void DstcInit(void (*)(void), void (*)(void));
-void DSTC_I2S_HANDLER_CH0 (void);
-void DSTC_I2S_HANDLER_CH1 (void);
-
-	
-#endif // platform_H
+// Converts two int16_t audio samples (left and right audio channel) into a uint32_t audio sample
+inline
+void convert_2ch_to_audio_sample(
+    int16_t* left_sample,           // input
+    int16_t* right_sample,          // input
+    uint32_t* audio_sample          // output
+    )
+{
+    uint32_t left_temp = static_cast<uint32_t>(*left_sample);
+    uint32_t right_temp = static_cast<uint32_t>(*right_sample);
+    *audio_sample = (left_temp << 16) | right_temp;
+}
 

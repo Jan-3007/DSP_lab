@@ -1,6 +1,5 @@
 #include "global.h"
 /*
-#define BLOCK_SIZE            32
 #define NUM_TAPS_ARRAY_SIZE              32
 #define NUM_TAPS 5
 
@@ -25,11 +24,13 @@ void test_dsp_lib()
 
 int main()
 {
-    // GPIO port configuration for 3 color LED, user button and test pin
-	GpioInit();
+    init_buffer();
 
-    IF_DEBUG(Uart0Init(115200));
+    // initialze whole platform, starts DMA, call as last init
+    init_platform(115200, hz32000, line_in);
 
+
+    // function calls surrounded by IF_DEBUG() will be removed when building a release
     IF_DEBUG(debug_printf("Hello World!\n"));
 
 //    test_dsp_lib();
@@ -37,15 +38,73 @@ int main()
     int i = 0;
     while(true)
     {
+        uint32_t input[BLOCK_SIZE];
+        uint32_t output[BLOCK_SIZE];
+        int16_t left_input[BLOCK_SIZE];
+        int16_t right_input[BLOCK_SIZE];
+        int16_t left_output[BLOCK_SIZE];
+        int16_t right_output[BLOCK_SIZE];
+
+        // read block of samples from input buffer
+        while(rx_buffer_read(input));
+
         gpio_set(LED_B, LOW);			// LED_B on
-        delay_ms(500);
+
+        // split samples into two channels
+        for(uint32_t i = BLOCK_SIZE; i > 0; i--)
+        {
+            convert_audio_sample_to_2ch(input, left_input, right_input);
+        }
+
+        // process the audio channels
+        // convert from int to float, see CMSIS DSP
+        // replace following for-loop with your audio processing
+        for(uint32_t i = BLOCK_SIZE; i > 0; i--)
+        {
+            left_output[i] = left_input[i];
+            right_output[i] = right_input[i];
+        }
+        // convert from float to int, see CMSIS DSP
+        
+
+        // merge two samples into one
+        for(uint32_t i = BLOCK_SIZE; i > 0; i--)
+        {
+            convert_2ch_to_audio_sample(left_output, right_output, output);
+        }
+
+        // write block of samples to output buffer
+        while(tx_buffer_write(output));
+
         gpio_set(LED_B, HIGH);			// LED_B off
-        delay_ms(500);
+
 
         IF_DEBUG(debug_printf("i = %d\n", i));
         i++;
     }
 
+
+    // fail save, never return from main on a microcontroller
+    fatal_error();
+
     return 0;
+}
+
+
+
+// the following functions are called, when the DMA has finished transferring one block of samples and needs a new memory address to write/read to/from
+
+// prototype defined in platform.h
+// get new memory address to read from and send data to DAC
+uint32_t* get_new_tx_buffer_ptr()
+{
+    return tx_buffer_get_read_ptr();;
+}
+
+// prototype defined in platform.h
+// get new memory address to write new data from ADC
+uint32_t* get_new_rx_buffer_ptr()
+{
+    return rx_buffer_get_write_ptr();;
 }
 
