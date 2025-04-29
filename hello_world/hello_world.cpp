@@ -38,6 +38,8 @@ int main()
     int i = 0;
     while(true)
     {
+        // using the hello_world_buffer to verify wether the hardware setup is working correctly
+        // the following arrays are necessary with this buffer to be able to process the audio signal
         uint32_t input[BLOCK_SIZE];
         uint32_t output[BLOCK_SIZE];
         int16_t left_input[BLOCK_SIZE];
@@ -45,46 +47,48 @@ int main()
         int16_t left_output[BLOCK_SIZE];
         int16_t right_output[BLOCK_SIZE];
 
-        // read block of samples from input buffer
+        // step 1: read block of samples from input buffer
         while(rx_buffer_read(input));
 
+        // blue LED is used to visualize (processing time)/(sample time)
         gpio_set(LED_B, LOW);			// LED_B on
 
-        // split samples into two channels
+        // step 2: split samples into two channels
         for(uint32_t i = BLOCK_SIZE; i > 0; i--)
         {
             convert_audio_sample_to_2ch(input, left_input, right_input);
         }
 
-        // process the audio channels
-        // convert from int to float, see CMSIS DSP
+        // step 3: process the audio channels
+        //      3.1: convert from int to float, see CMSIS DSP
+        //      3.2: process data
+        //
         // replace following for-loop with your audio processing
         for(uint32_t i = BLOCK_SIZE; i > 0; i--)
         {
             left_output[i] = left_input[i];
             right_output[i] = right_input[i];
         }
-        // convert from float to int, see CMSIS DSP
+        //      3.3: convert from float to int, see CMSIS DSP
         
-
-        // merge two samples into one
+        // step 4: merge two samples into one
         for(uint32_t i = BLOCK_SIZE; i > 0; i--)
         {
             convert_2ch_to_audio_sample(left_output, right_output, output);
         }
 
-        // write block of samples to output buffer
+        // step 5: write block of samples to output buffer
         while(tx_buffer_write(output));
 
         gpio_set(LED_B, HIGH);			// LED_B off
 
-
+        // print to test UART
         IF_DEBUG(debug_printf("i = %d\n", i));
         i++;
     }
 
 
-    // fail save, never return from main on a microcontroller
+    // fail-safe, never return from main on a microcontroller
     fatal_error();
 
     return 0;
@@ -98,13 +102,13 @@ int main()
 // get new memory address to read from and send data to DAC
 uint32_t* get_new_tx_buffer_ptr()
 {
-    return tx_buffer_get_read_ptr();;
+    return tx_buffer_get_read_ptr();
 }
 
 // prototype defined in platform.h
 // get new memory address to write new data from ADC
 uint32_t* get_new_rx_buffer_ptr()
 {
-    return rx_buffer_get_write_ptr();;
+    return rx_buffer_get_write_ptr();
 }
 
