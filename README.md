@@ -162,22 +162,19 @@ You are ready to start your own project!
 
 
 # Flash CMSIS-DAP FW on MB9AF312K
-
-1. Install "FLASH USB DIRECT Programmer.msi"
-    - go to "downloads/FM4S6E2GMKitSetup_RevSB/"
-    - run "FLASH USB DIRECT Programmer.msi"
-1. find "mb9af31xk_cmsis_dap_v25.srec" in "downloads/MB9AF312K_FW/"
-1. Set J4 = 1-2
-1. Set J1 closed
-1. Use USB CN2
-1. Plug device in, check COM Port in Device Manager
-    - if not present, run "USBVCOM Driver Installer.msi" from "downloads/FM4S6E2GMKitSetup_RevSB/"
-1. Run USBDirect, select MB9AF312K, .srec file and COM port
+The following instructions include programs which can be accessed by installing the "FM4S6E2GMKitSetup_RevSB.exe", see [download links](#download-links). This will install more programs then necessary, to avoid this, unpack the .exe inside a folder and execute only the necessary programs.
+1. install "FLASH USB DIRECT Programmer.msi" from "FM4S6E2GMKitSetup_RevSB"
+1. set J4 = 1-2
+1. set J1 closed
+1. plug the board into your PC by using USB CN2
+1. check COM Port in Device Manager
+    - if not present, run "USBVCOM Driver Installer.msi" from "FM4S6E2GMKitSetup_RevSB"
+1. Run USBDirect, select MB9AF312K, the correct COM port and find "mb9af31xk_cmsis_dap_v25.srec" in "downloads/MB9AF312K_FW/"
 1. click "Full Operation" (note: when reset required, unplug and replug USB and quickly press OK)
 1. when done, unplug USB
-1. Open J1
-1. Plug device in again
-1. Check Device Manager for "FM-Link/CMSIS-DAP Cypress FM Communications Port" device
+1. open J1
+1. plug device in again
+1. check Device Manager for "FM-Link/CMSIS-DAP Cypress FM Communications Port" device
 
 
 
