@@ -128,7 +128,6 @@ The following steps can be made within in VS Code
     - search for the `project()` command (line 21) and replace "hello_world" with {project_name}
 
 >[!NOTE]
-> editing CMake files:
 > after changing a CMake file, it is important to Reconfigure using the CMake extension
 
 You are ready to start your own project!
