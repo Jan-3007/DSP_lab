@@ -12,8 +12,6 @@
  */
 #pragma once
 
-#include "hello_world_config.h"
-
 /*! This enum describes the different sampling frequency setup of the CODEC */
 typedef enum
 {

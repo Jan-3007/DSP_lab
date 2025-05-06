@@ -76,6 +76,21 @@ add_custom_command(TARGET ${target_name} POST_BUILD
     VERBATIM
     )
 
+# create .symbols file (post build)
+add_custom_command(TARGET ${target_name} POST_BUILD
+COMMAND ${CMAKE_NM} --numeric-sort --line-numbers --demangle --print-size "${PROJECT_NAME}.axf" ">" "${PROJECT_NAME}.symbols"
+VERBATIM
+)
+
+# create .disasm file (post build)
+add_custom_command(TARGET ${target_name} POST_BUILD
+COMMAND ${CMAKE_OBJDUMP} --disassemble --demangle "${PROJECT_NAME}.axf" ">" "${PROJECT_NAME}.disasm"
+VERBATIM
+)
+
+
+
+
 
 #
 # add sources to target
@@ -103,12 +118,16 @@ target_sources(${target_name} PRIVATE
     PDL/wm8731.c
     )
 
-# add custom code to the project
+# add util files to the project
 target_sources(${target_name} PRIVATE
     utils/crt_dummy_syscalls.c
     utils/platform.cpp
     utils/utils.cpp
     utils/debug_utils.cpp
+    )
+
+# add custom code to the project
+target_sources(${target_name} PRIVATE
     hello_world.cpp
     hello_world_buffer.cpp
     )

@@ -17,3 +17,10 @@ void debug_printf(const char* fmt, ...);
 
 
 void fatal_error();
+
+#ifdef DEBUG
+#define ASSERT(cond)    if(!(cond)) fatal_error()
+#else
+#define ASSERT(cond)
+#endif
+
