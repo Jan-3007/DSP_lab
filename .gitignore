@@ -8,8 +8,6 @@
 build/
 
 #custom
-downloads/
+downloads_safekeep/
 
-hello_world/device/S6E2CCAJOA.ld
-*.ld
-hello_world/utils/platform.c
+

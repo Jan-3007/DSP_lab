@@ -37,6 +37,8 @@ Find all documentation under "docs/". Some downloads are available under "downlo
 4. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
 5. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
+>[!NOTE]
+> all recommended versions have been tested, using different versions may result in errors
 
 ## Linux
 
@@ -57,7 +59,7 @@ To install GCC:
     - section: "x86_64 Linux hosted cross toolchains"
     - subsection: "AArch32 bare-metal target (arm-none-eabi)"
     - file: "arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz"
-- unzip and copy/move folder to "/opt/" using `cp -R arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi /usr/bin/`
+- unzip and copy/move folder to "/usr/bin/" using `cp -R arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi /usr/bin/`
 - if deviating, edit path in "{project_name}/.vscode/launch.json" and "{project_name}/cmake/toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 
 
