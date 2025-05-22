@@ -38,7 +38,7 @@ int main()
     int i = 0;
     while(true)
     {
-        // using the hello_world_buffer to verify wether the hardware setup is working correctly
+        // using the hello_world_buffer to verify whether the hardware setup is working correctly
         // the following arrays are necessary with this buffer to be able to process the audio signal
         uint32_t input[BLOCK_SIZE];
         uint32_t output[BLOCK_SIZE];
@@ -59,8 +59,9 @@ int main()
             convert_audio_sample_to_2ch(input, left_input, right_input);
         }
 
+
         // step 3: process the audio channels
-        //      3.1: convert from int to float, see CMSIS DSP
+        //      3.1: convert from int to float, see CMSIS_DSP
         //      3.2: process data
         //
         // replace following for-loop with your audio processing
@@ -69,8 +70,9 @@ int main()
             left_output[i] = left_input[i];
             right_output[i] = right_input[i];
         }
-        //      3.3: convert from float to int, see CMSIS DSP
+        //      3.3: convert from float to int, see CMSIS_DSP
         
+
         // step 4: merge two samples into one
         for(uint32_t i = BLOCK_SIZE; i > 0; i--)
         {

@@ -82,8 +82,8 @@ Check for connected USB devices using `lsusb`. See step 6 of section [Windows](#
 
 - jumper configuration:
 	- J1, J2 open
-	- J4: 1-2
     - J3: 2-3 
+	- J4: 1-2
 - plug your board into your PC using the USB cable
 - launch "hello_world.code-workspace" (with VS Code)
 - install all recommended extensions, they will be displayed as a notification by VS Code in the bottom right
@@ -151,17 +151,18 @@ You are ready to start your own project!
 # Flash CMSIS-DAP FW on MB9AF312K
 The following instructions include programs which can be accessed by installing the "FM4S6E2GMKitSetup_RevSB.exe", see [download links](#download-links). This will install more programs then necessary, to avoid this, unpack the .exe inside a folder and execute only the necessary programs.
 1. install "FLASH USB DIRECT Programmer.msi" from "FM4S6E2GMKitSetup_RevSB"
-1. set J4 = 1-2
-1. set J1 closed
-1. plug the board into your PC by using USB CN2
-1. check COM Port in Device Manager
+2. set J3: 2-3 
+3. set J4 = 1-2
+4. set J1 closed
+5. plug the board into your PC by using USB CN2
+6. check COM Port in Device Manager
     - if not present, run "USBVCOM Driver Installer.msi" from "FM4S6E2GMKitSetup_RevSB"
-1. Run USBDirect, select MB9AF312K, the correct COM port and find "mb9af31xk_cmsis_dap_v25.srec" in "downloads/MB9AF312K_FW/"
-1. click "Full Operation" (note: when reset required, unplug and replug USB and quickly press OK)
-1. when done, unplug USB
-1. open J1
-1. plug device in again
-1. check Device Manager for "FM-Link/CMSIS-DAP Cypress FM Communications Port" device
+7. Run USBDirect, select MB9AF312K, the correct COM port and find "mb9af31xk_cmsis_dap_v25.srec" in "downloads/MB9AF312K_FW/"
+8. click "Full Operation" (note: when reset required, unplug and replug USB and quickly press OK)
+9. when done, unplug USB
+10. open J1
+11. plug device in again
+12. check Device Manager for "FM-Link/CMSIS-DAP Cypress FM Communications Port" device
 
 
 
