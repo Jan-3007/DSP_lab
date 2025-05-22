@@ -11,8 +11,8 @@ include(cmake/utils.cmake)
 # CMSIS Core library
 set(CMSISCORE "${CMAKE_CURRENT_LIST_DIR}/CMSIS/Core")
 
-# CMSIS DSP library             temp
-#set(CMSISDSP "${CMAKE_CURRENT_LIST_DIR}/CMSIS_DSP")
+# CMSIS DSP library
+set(CMSISDSP "${CMAKE_CURRENT_LIST_DIR}/CMSIS_DSP")
 
 
 #
@@ -41,9 +41,9 @@ list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/utils")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/device")
 
 
-# build CMSIS-DSP library           temp
-#add_subdirectory("${CMSISDSP}/Source" lib_dsp)
-#target_compile_definitions(CMSISDSP PRIVATE ${compile_definitions} )
+# build CMSIS-DSP library
+add_subdirectory("${CMSISDSP}/Source" lib_dsp)
+target_compile_definitions(CMSISDSP PRIVATE ${compile_definitions} )
 
 
 #
@@ -96,10 +96,10 @@ VERBATIM
 # add sources to target
 #
 
-# add libs to link with         temp
-#target_link_libraries(${target_name} 
-#    CMSISDSP
-#    )
+# add libs to link with
+target_link_libraries(${target_name} 
+    CMSISDSP
+    )
 
 # add startup code to the project
 target_sources(${target_name} PRIVATE
@@ -129,7 +129,7 @@ target_sources(${target_name} PRIVATE
 # add custom code to the project
 target_sources(${target_name} PRIVATE
     hello_world.cpp
-    hello_world_buffer.cpp
+    hello_world_circ_buffer.cpp
     )
 
 
