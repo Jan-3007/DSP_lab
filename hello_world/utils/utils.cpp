@@ -114,7 +114,7 @@ void delay_us(unsigned int us)
 
 #pragma GCC push_options
 #pragma GCC optimize ("O0")
-void delay_cycles(unsigned int cycles)      // ???
+void delay_cycles(unsigned int cycles)      // ??? creates warning during compilation
 {
 	asm("LSRS r0, #2");
 	asm("BEQ done");

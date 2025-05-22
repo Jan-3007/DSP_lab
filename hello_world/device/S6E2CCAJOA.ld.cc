@@ -175,7 +175,7 @@ SECTIONS
 
 
 
-  .copy.table (READONLY):   /* ??? */
+  .copy.table (READONLY):   /* ??? has to be READONLY, or else linker gives warning that readonly data within a LOAD segment has rwx permissions*/
   {
     . = ALIGN(4);
     __copy_table_start__ = .;
@@ -189,7 +189,7 @@ SECTIONS
 
 
 
-  .zero.table (READONLY):   /* ??? */
+  .zero.table /*(READONLY)*/:   /* ??? */
   {
     . = ALIGN(4);
     __zero_table_start__ = .;
@@ -277,7 +277,7 @@ SECTIONS
 
 
   /* .stack section for the stack, placed at the end of the RAM if calculation after .stack is active */
-  .stack /*(ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE)*/ (NOLOAD) :      /* ??? */
+  .stack (ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE) (NOLOAD) :      /* ??? */
   {
     . = ALIGN(8);
     __StackLimit = .;

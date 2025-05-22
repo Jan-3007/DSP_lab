@@ -50,7 +50,7 @@ __NO_RETURN void Default_Handler(void);
   Exception / Interrupt Handler
  *---------------------------------------------------------------------------*/
 /* Exceptions */
-void NMI_Handler                (void) __attribute__ ((weak, alias("Default_Handler"), noreturn)); // why has arm left out "noreturn" ???
+void NMI_Handler                (void) __attribute__ ((weak, alias("Default_Handler"), noreturn)); // why has arm left out "noreturn" ??? see https://github.com/ARM-software/CMSIS_6/issues/234
 void HardFault_Handler          (void) __attribute__ ((weak));
 void MemManage_Handler          (void) __attribute__ ((weak, alias("Default_Handler"), noreturn));
 void BusFault_Handler           (void) __attribute__ ((weak, alias("Default_Handler"), noreturn));

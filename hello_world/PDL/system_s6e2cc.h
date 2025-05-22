@@ -734,7 +734,7 @@ extern "C" {
   \brief Exception / Interrupt Handler Function Prototype
   for C startup code
 */
-typedef void(*VECTOR_TABLE_Type)(void);     // ???
+typedef void(*VECTOR_TABLE_Type)(void);     // ??? fault of Spansion
 
 extern uint32_t SystemCoreClock;          // System Clock Frequency (Core Clock)
    
