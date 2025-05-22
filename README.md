@@ -73,7 +73,7 @@ pacman -Ss arm-none-eabi-newlib
 ```
 
 
-Check for connected USB devices using `lsusb`.
+Check for connected USB devices using `lsusb`. See step 6 of section [](#Windows).
 
 
 
