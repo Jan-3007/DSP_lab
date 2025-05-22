@@ -228,7 +228,7 @@ Refer to the file "downloads/FM4_FilterLab_1_3_Template/Eclipse_Application_Note
 
 
 
-# Download-Links
+# Download links
 
 Check the "downloads/" folder of this sample project before downloading.
 
