@@ -148,21 +148,6 @@ You are ready to start your own project!
 
 
 
-# How to create your own project
-
-1. copy the entire project folder and rename it to your project
-2. enter your project folder
-3. open the project workspace by double-clicking "hello_world.code-workspace"
-4. open the file "CMakeLists.txt" and replace "hello_world" with your project name in the command "project()" (should be line 16)
-5. close VS Code
-6. edit the folder "hello_world" and replace the name with your project name
-7. open the file "hello_world.code-workspace" in an editor and change the value of the variable "path" to the same name of the folder from step 6
-8. edit the file name "hello_world.code-workspace" and replace "hello_world" with your own project name
-9. you are set to work on your project
-
-
-
-
 # Flash CMSIS-DAP FW on MB9AF312K
 The following instructions include programs which can be accessed by installing the "FM4S6E2GMKitSetup_RevSB.exe", see [download links](#download-links). This will install more programs then necessary, to avoid this, unpack the .exe inside a folder and execute only the necessary programs.
 1. install "FLASH USB DIRECT Programmer.msi" from "FM4S6E2GMKitSetup_RevSB"
