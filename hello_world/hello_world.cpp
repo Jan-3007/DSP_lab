@@ -1,45 +1,31 @@
 #include "global.h"
-/*
-#define NUM_TAPS_ARRAY_SIZE              32
-#define NUM_TAPS 5
-
-const float32_t firCoeffs32[NUM_TAPS_ARRAY_SIZE] = {
-  -0.0018225230f, -0.0015879294f, +0.0000000000f, +0.0036977508f, +0.0080754303f, +0.0085302217f, -0.0000000000f, -0.0173976984f,
-  -0.0341458607f, -0.0333591565f, +0.0000000000f, +0.0676308395f, +0.1522061835f, +0.2229246956f, +0.2504960933f, +0.2229246956f,
-  +0.1522061835f, +0.0676308395f, +0.0000000000f, -0.0333591565f, -0.0341458607f, -0.0173976984f, -0.0000000000f, +0.0085302217f,
-  +0.0080754303f, +0.0036977508f, +0.0000000000f, -0.0015879294f, -0.0018225230f, 0.0f,0.0f,0.0f
-};
-
-static float32_t firStateF32[2 * BLOCK_SIZE + NUM_TAPS - 1];
-
-void test_dsp_lib()
-{
-    arm_fir_instance_f32 fir_filter;
-    arm_fir_init_f32(&fir_filter, NUM_TAPS, (float32_t *)&firCoeffs32[0], &firStateF32[0], BLOCK_SIZE);
-}
-*/
 
 
+
+// using the hello_world_circ_buffer to verify whether the hardware setup is working correctly
+CircularBuffer rx_buffer;
+CircularBuffer tx_buffer;
 
 
 int main()
 {
-    init_buffer();
-
-    // initialze whole platform, starts DMA, call as last init
+    // initialze whole platform, starts DMA
     init_platform(115200, hz32000, line_in);
-
 
     // function calls surrounded by IF_DEBUG() will be removed when building a release
     IF_DEBUG(debug_printf("Hello World!\n"));
+    debug_printf("%s, %s\n", __DATE__, __TIME__);
 
-//    test_dsp_lib();
+    // init test pin P10; CN10, labelled as A3
+    gpio_set(TEST_PIN, LOW);
+
+    // start I2S, call just before your main loop
+    platform_start();
 
     int i = 0;
     while(true)
     {
-        // using the hello_world_buffer to verify whether the hardware setup is working correctly
-        // the following arrays are necessary with this buffer to be able to process the audio signal
+        // the following arrays are necessary to be able to process the audio signal
         uint32_t input[BLOCK_SIZE];
         uint32_t output[BLOCK_SIZE];
         int16_t left_input[BLOCK_SIZE];
@@ -48,10 +34,11 @@ int main()
         int16_t right_output[BLOCK_SIZE];
 
         // step 1: read block of samples from input buffer
-        while(rx_buffer_read(input));
+        while(!rx_buffer.read(input));
 
         // blue LED is used to visualize (processing time)/(sample time)
         gpio_set(LED_B, LOW);			// LED_B on
+        gpio_set(TEST_PIN, HIGH);       // Test Pin High
 
         // step 2: split samples into two channels
         for(uint32_t i = BLOCK_SIZE; i > 0; i--)
@@ -63,7 +50,7 @@ int main()
         // step 3: process the audio channels
         //      3.1: convert from int to float, see CMSIS_DSP
         //      3.2: process data
-        //
+    
         // replace following for-loop with your audio processing
         for(uint32_t i = BLOCK_SIZE; i > 0; i--)
         {
@@ -73,22 +60,21 @@ int main()
         //      3.3: convert from float to int, see CMSIS_DSP
         
 
-        // step 4: merge two samples into one
+        // step 4: merge two channels into one sample
         for(uint32_t i = BLOCK_SIZE; i > 0; i--)
         {
             convert_2ch_to_audio_sample(left_output, right_output, output);
         }
 
         // step 5: write block of samples to output buffer
-        while(tx_buffer_write(output));
+        while(!tx_buffer.write(output));
 
         gpio_set(LED_B, HIGH);			// LED_B off
+        gpio_set(TEST_PIN, LOW);        // Test Pin Low
 
-        // print to test UART
         IF_DEBUG(debug_printf("i = %d\n", i));
         i++;
     }
-
 
     // fail-safe, never return from main on a microcontroller
     fatal_error();
@@ -104,13 +90,23 @@ int main()
 // get new memory address to read from and send data to DAC
 uint32_t* get_new_tx_buffer_ptr()
 {
-    return tx_buffer_get_read_ptr();
+    uint32_t* temp = tx_buffer.get_read_ptr();
+    if(temp == nullptr)
+    {
+        fatal_error();
+    }
+    return temp;
 }
 
 // prototype defined in platform.h
 // get new memory address to write new data from ADC
 uint32_t* get_new_rx_buffer_ptr()
 {
-    return rx_buffer_get_write_ptr();
+    uint32_t* temp = rx_buffer.get_write_ptr();
+    if(temp == nullptr)
+    {
+        fatal_error();
+    }
+    return temp;
 }
 

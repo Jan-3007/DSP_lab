@@ -20,8 +20,6 @@
  *      baud_rate: Choose appropriate value, typical values for a pc system are 921600, 460800, 230400, 115200 etc.
  * 	    sample_rate: hz8000, hz32000, hz48000 or hz96000, used for I2S and CODEC
  * 	    audio_in: Selects line_in or mic_in of the CODEC
- * 	    tx_initial_buffer: Pointer to buffer for transmitting (tx) data
- * 	    rx_initial_buffer: Pointer to buffer for receiving (rx) data
  */
 void init_platform(
     uint32_t baud_rate, 
@@ -45,7 +43,10 @@ void init_platform(
 	//Configures DSTC channel 0 to transfer data from memory to I2S TX,
 	// and channel 1 from I2S RX to memory.
 	init_dstc();
+}
 
+void platform_start()
+{
 	I2s_StartClk(&I2S0);						// I2SEN = 1, clock to I2S macro disabled
 
 	I2s_EnableTx(&I2S0);
@@ -149,6 +150,8 @@ void init_dstc()
 
 	Dstc_SetHwdesp(DSTC_IRQ_NUMBER_I2S0_TX, 0);			// descriptor pointer start address at DESTP + offset 0 for HW channel 219
 
+
+
 	// channel 1 = Reads from the I2S peripheral and transfer to (dma_rx_buffer_ping and dma_rx_buffer_pong)
 	// CH1, DES0
 	stcDES[1].DES0.DV    = 0x03;           	// Don't Execute the DES close process after transfer ends
@@ -184,7 +187,10 @@ void init_dstc()
 
 	Dstc_SetHwdesp(DSTC_IRQ_NUMBER_I2S0_RX, 0x1C);		// descriptor pointer start address DESTP + offset 0x1C for HW channel 218
 														// (7 DES0 x 4 Bytes each = 0x1C)
-	// populate dstc config structure
+
+
+
+    // populate dstc config structure
 
 	// DES Top, start Address of DES Area (must be aligned to 32 Bit!)
 	stcDstcConfig.u32Destp = (uint32_t) &stcDES[0];
@@ -349,7 +355,7 @@ void init_I2S0(sampling_rate sample_rate)
 	 stci2s0Cfg.u8ClockDiv = 0u;	// Bypass, use external clock as is
 
 	 // overhead bits
-	 if (sample_rate == hz8000) 	stci2s0Cfg.u16OverheadBits = 352;
+	 if (sample_rate == hz8000)  stci2s0Cfg.u16OverheadBits = 352;
 	 if (sample_rate == hz32000) stci2s0Cfg.u16OverheadBits = 64;
 	 if (sample_rate == hz48000) stci2s0Cfg.u16OverheadBits = 32;
 	 if (sample_rate == hz96000) stci2s0Cfg.u16OverheadBits = 96;

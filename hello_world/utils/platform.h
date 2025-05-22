@@ -35,6 +35,8 @@ void init_platform (
     audio_input audio_in
     );
 
+void platform_start();
+
 void init_uart0(
     uint32_t baud_rate
     );
