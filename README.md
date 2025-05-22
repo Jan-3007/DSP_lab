@@ -177,17 +177,18 @@ Refer to https://www.segger.com/products/debug-probes/j-link/models/other-j-link
     - run the "FLASH USB DIRECT Programmer.msi"
 3. Download "J-Link-OB-MB9AF312K-Spansion_150917.srec"
 4. Set J4 = 1-2
-5. Set J1 closed
-6. Use USB CN2
-7. Plug device in, check COM Port in Device Manager
-8. Run USBDirect, select MB9AF312K, downloaded .srec file and COM port
-9. click Full Operation (note: when reset required, unplug and replug USB and quickly press OK)
-10. when done, unplug USB
-11. Open J1
-12. Plug device in again
-13. Check Device Manager for J-Link device
-14. Download latest "J-Link Software and Documentation pack" and install
-15. manually install the drivers on J-Link and CDC device from C:\Program Files\SEGGER\JLink_V810c\USBDriver\x64
+5. Set J3 = 2-3
+6. Set J1 closed
+7. Use USB CN2
+8. Plug device in, check COM Port in Device Manager
+9. Run USBDirect, select MB9AF312K, downloaded .srec file and COM port
+10. click Full Operation (note: when reset required, unplug and replug USB and quickly press OK)
+11. when done, unplug USB
+12. Open J1
+13. Plug device in again
+14. Check Device Manager for J-Link device
+15. Download latest "J-Link Software and Documentation pack" and install
+16. manually install the drivers on J-Link and CDC device from C:\Program Files\SEGGER\JLink_V810c\USBDriver\x64
 instructions: 
     - right click on device node in device manager, select "Update Driver"
     - "Browse...", "Let me pick...", "Have Disk", Select above dir
