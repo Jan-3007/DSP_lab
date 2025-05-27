@@ -7,7 +7,11 @@
 [Rr]elease/
 build/
 
-#custom
+
+# VS Code files
+settings.json
+
+#custom for development
 downloads_safekeep/
 Notes.txt
 

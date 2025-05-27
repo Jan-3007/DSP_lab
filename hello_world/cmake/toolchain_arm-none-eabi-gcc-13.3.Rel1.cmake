@@ -17,12 +17,12 @@ set(toolchain_triplet "arm-none-eabi-")
 # specify path to toolchain  
 if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
     message(STATUS "OS: Windows")
-    set(GCC_ARM_V13_3_R1_ROOT "C:/GCC/arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi")
+    set(GCC_ARM_V13_3_R1_ROOT "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.3 rel1/bin")
 endif()
 if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
     message(STATUS "OS: Linux")
 #    set(GCC_ARM_V13_3_R1_ROOT "/opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi")
-    set(GCC_ARM_V13_3_R1_ROOT "/usr/bin")
+    set(GCC_ARM_V13_3_R1_ROOT "/usr/bin") #???
 endif()
 
 

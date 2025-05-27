@@ -6,7 +6,7 @@
     "cmake.clearOutputBeforeBuild": false,
     "cmake.saveBeforeBuild": true
 
-    ,"cmake.cmakePath": "C:/CMake/bin/cmake.exe"
+    ,"cmake.cmakePath": "C:/Program Files/CMake/bin/cmake.exe"   
 }
 
 

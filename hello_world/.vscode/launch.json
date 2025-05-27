@@ -13,15 +13,16 @@
 
             "windows": {
                 // location of GDB and other tools
-                "armToolchainPath": "C:/GCC/arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/bin",
+                "armToolchainPath": "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.3 rel1/bin",
         
-                "serverpath": "C:/OpenOCD/bin/openocd.exe",
-                "searchDir": [ "C:/OpenOCD/share/openocd/scripts" ],
+                "serverpath": "C:/Program Files/OpenOCD/v0.12.0/bin/openocd.exe",
+                "searchDir": [ "C:/Program Files/OpenOCD/v0.12.0/share/openocd/scripts" ],
             },
 
             "linux": {
                 // location of GDB and other tools
-                "armToolchainPath": "/opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin",
+                //"armToolchainPath": "/opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin", ???
+                "armToolchainPath": "/usr/bin/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin",
         
                 "serverpath": "/usr/bin/openocd",
                 "searchDir": [ "/usr/share/openocd/scripts" ],

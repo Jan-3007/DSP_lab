@@ -10,35 +10,55 @@ Find all documentation under "docs/". Some downloads are available under "downlo
 
 # Prerequisites for this sample project
 
-## Windows
+This project is for the Visual Studio Code IDE. It therefore needs to be installed.
 
+## Windows
+### download and installation using Windows Powershell
+1. open Powershell as Administrator
+2. install all required packages using the following commands
+```
+winget install Kitware.cmake -v 3.30.5
+winget install Arm.GnuArmEmbeddedToolchain -v "13.3 2024.07"
+winget install Ninja-build.ninja -v 1.12.1
+
+mkdir 'C:\Program Files\OpenOCD\v0.12.0'
+Invoke-WebRequest https://github.com/openocd-org/openocd/releases/download/v0.12.0/openocd-v0.12.0-i686-w64-mingw32.tar.gz -OutFile 'C:\Program Files\OpenOCD\v0.12.0\openocd-v0.12.0-i686-w64-mingw32.tar.gz'
+tar -xvf 'C:\Program Files\OpenOCD\v0.12.0\openocd-v0.12.0-i686-w64-mingw32.tar.gz' -C 'C:\Program Files\OpenOCD\v0.12.0' 
+rm 'C:\Program Files\OpenOCD\v0.12.0\openocd-v0.12.0-i686-w64-mingw32.tar.gz'
+```
+
+
+
+### manual downloads and installation
 1. GCC
     - recommended release: 13.3 rel1
     - download from [website](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
         - section: "Windows (mingw-w64-i686) hosted cross toolchains"
         - subsection: "AArch32 bare-metal target (arm-none-eabi)"
         - file: "arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi.zip"
-    - unzip and copy/move to recommended location: "C:/GCC/arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/" 
+    - unzip and copy/move to recommended location: "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.3 rel1/" 
     - if deviating, edit path in "{project_name}/.vscode/launch.json" and "{project_name}/cmake/toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 1. OpenOCD 
     - recommended version: 0.12.0
     - download from [website](https://github.com/openocd-org/openocd/releases/tag/v0.12.0)
         - file: "openocd-v0.12.0-i686-w64-mingw32.tar.gz"
-    - unzip and copy/move to recommended location: "C:/OpenOCD/"
+    - unzip and copy/move to recommended location: "C:/Program Files/OpenOCD/v0.12.0/"
     - if deviating, edit path in "{project_name}/.vscode/launch.json"
 2. CMake
     - recommended version: 3.30.5, at least 3.20
-    - download from [website](https://cmake.org/download/#latest)
+    - download from [website](https://github.com/Kitware/CMake/releases/tag/v3.30.5)
         - file: "cmake-3.30.5-windows-x86_64.zip"
-    - unzip and copy/move to recommended location: "C:/CMake/"
+    - unzip and copy/move to recommended location: "C:/Program Files/CMake/"
     - if deviating, edit path in "{project_name}/.vscode/settings.windows.json"
 3. Ninja
-    - if not installed yet, run `winget install Ninja-build.Ninja`
+    - if not installed yet, run `winget install Ninja-build.Ninja -v 1.12.1`
 4. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
 5. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
 >[!NOTE]
 > all recommended versions have been tested, using different versions may result in errors
+
+
 
 ## Linux
 
@@ -52,14 +72,16 @@ sudo apt install openocd
 sudo apt install cmake
 sudo apt install ninja-build
 sudo apt install libncursesw5
+sudo apt install gcc-arm-none-eabi=13.3.rel1-1
 ```
 
-To install GCC:
+To install GCC:     //???
 - download from [website](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
     - section: "x86_64 Linux hosted cross toolchains"
     - subsection: "AArch32 bare-metal target (arm-none-eabi)"
     - file: "arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz"
-- unzip and copy/move folder to "/usr/bin/" using `cp -R arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi /usr/bin/`
+- unzip folder
+- copy/move folder to "/usr/bin/" using `cp -R arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi /usr/bin/`
 - if deviating, edit path in "{project_name}/.vscode/launch.json" and "{project_name}/cmake/toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 
 Check for connected USB devices using `lsusb`. See step 6 of section [Windows](#windows).
