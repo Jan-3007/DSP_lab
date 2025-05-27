@@ -46,6 +46,8 @@
             "runToEntryPoint": "main",
         },
 
+
+//??? needs an update
         {
             "name": "GDB debugger J-Link",
             "type": "cortex-debug",
