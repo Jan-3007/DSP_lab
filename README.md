@@ -13,7 +13,7 @@ Find all documentation under "docs/". Some downloads are available under "downlo
 This project is for the Visual Studio Code IDE. It therefore needs to be installed.
 
 ## Windows
-### download and installation using Windows Powershell
+### Download and installation using Windows Powershell
 1. open Powershell as Administrator
 2. install all required packages using the following commands
 ```
@@ -29,7 +29,7 @@ rm 'C:\Program Files\OpenOCD\v0.12.0\openocd-v0.12.0-i686-w64-mingw32.tar.gz'
 
 
 
-### manual downloads and installation
+### Manual downloads and installation
 1. GCC
     - recommended release: 13.3 rel1
     - download from [website](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
