@@ -131,7 +131,7 @@ void init_dstc()
 	stcDES[0].DES0.RESERVED = 0u;   	// Required
 	stcDES[0].DES0.PCHK  	= DSTC_PCHK_CALC(stcDES[0].u32DES0);	// parity
 
-	// CH0, DES1, counters can be set to 1 - 256, and multiples of 256      //TODO ??? can it be done differently
+	// CH0, DES1, counters can be set to 1 - 256
 	stcDES[0].DES1_mode1.ORM = ((BLOCK_SIZE -1) >> 8) + 1;			// outer loop count
 	stcDES[0].DES1_mode1.IIN = (stcDES[0].DES1_mode1.ORM > 1) ? 0 : BLOCK_SIZE & 0XFF;  // Inner loop, max 256; 256 = 0
 	stcDES[0].DES1_mode1.IRM = stcDES[0].DES1_mode1.IIN;			// Same as IIN
@@ -168,7 +168,7 @@ void init_dstc()
 	stcDES[1].DES0.RESERVED = 0u;			// Required
 	stcDES[1].DES0.PCHK  = DSTC_PCHK_CALC(stcDES[1u].u32DES0);
 
-	// CH1, DES1, counters can be set to 1 - 256, and multiples of 256
+	// CH1, DES1, counters can be set to 1 - 256
 	stcDES[1].DES1_mode1.ORM = ((BLOCK_SIZE -1) >> 8) + 1;		// outer loop count
 	stcDES[1].DES1_mode1.IIN = (stcDES[1].DES1_mode1.ORM > 1) ? 0 : BLOCK_SIZE & 0XFF;  // Inner loop, max 256; 256 = 0
 	stcDES[1].DES1_mode1.IRM = stcDES[1].DES1_mode1.IIN;   		// Same as IIN

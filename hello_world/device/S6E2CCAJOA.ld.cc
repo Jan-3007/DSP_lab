@@ -81,7 +81,7 @@ MEMORY
 {
   FLASH (rx)  : ORIGIN = __ROM_BASE, LENGTH = __ROM_SIZE
   RAM   (rwx) : ORIGIN = __RAM_BASE, LENGTH = (__RAM_SIZE - __STACK_SIZE)
-  STACK (rwx) : ORIGIN = (ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE), LENGTH = __STACK_SIZE
+  STACK (rwx) : ORIGIN = ((ORIGIN(RAM) + LENGTH(RAM)) - __STACK_SIZE), LENGTH = __STACK_SIZE
 }
 
 /* Linker script to place sections and symbol values. Should be used together
@@ -174,8 +174,8 @@ SECTIONS
   __exidx_end = .;
 
 
-
-  .copy.table (READONLY):   /* ??? has to be READONLY, or else linker gives warning that readonly data within a LOAD segment has rwx permissions*/
+/* has to be READONLY, or else linker gives warning that readonly data within a LOAD segment has rwx permissions*/
+  .copy.table (READONLY):
   {
     . = ALIGN(4);
     __copy_table_start__ = .;
@@ -187,9 +187,7 @@ SECTIONS
     __copy_table_end__ = .;
   } > FLASH
 
-
-
-  .zero.table /*(READONLY)*/:   /* ??? */
+  .zero.table (READONLY):
   {
     . = ALIGN(4);
     __zero_table_start__ = .;
@@ -276,8 +274,8 @@ SECTIONS
 
 
 
-  /* .stack section for the stack, placed at the end of the RAM if calculation after .stack is active */
-  .stack (ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE) (NOLOAD) :      /* ??? */
+  /* .stack section for the main stack, placed at the end of the RAM */
+  .stack ( ORIGIN(STACK) ) (NOLOAD) :
   {
     . = ALIGN(8);
     __StackLimit = .;

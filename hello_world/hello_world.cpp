@@ -72,6 +72,7 @@ int main()
         gpio_set(LED_B, HIGH);			// LED_B off
         gpio_set(TEST_PIN, LOW);        // Test Pin Low
 
+        // print value of i, for initial testing purposes only
         IF_DEBUG(debug_printf("i = %d\n", i));
         i++;
     }

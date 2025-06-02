@@ -40,7 +40,7 @@
 
 
             // cortex-debug logging
-            "showDevDebugOutput": "raw",  // one of: "raw", "parsed", "both", "vscode"
+            "showDevDebugOutput": "vscode",  // one of: "raw", "parsed", "both", "vscode"
             //"showDevDebugTimestamps": true,
 
             "runToEntryPoint": "main",
