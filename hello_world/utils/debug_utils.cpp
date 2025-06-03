@@ -40,7 +40,7 @@ fatal_error()
     // LED_R on
 	gpio_set(LED_R, LOW);	
 
-    IF_DEBUG(debug_printf("FATAL ERROR"));
+    IF_DEBUG(debug_printf("FATAL ERROR\n"));
 
     while(true);
 }
