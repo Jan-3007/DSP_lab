@@ -8,6 +8,11 @@
 // PDL
 #include "pdl_header.h"
 
+
+// custom config
+#include "hello_world_config.h"
+
+
 // utils
 #include "platform.h"
 #include "utils.h"
@@ -17,9 +22,7 @@
 #include "arm_math.h"
 
 
-
 // custom
-#include "hello_world_config.h"
 #include "debug_utils.h"
 #include "hello_world_circ_buffer.h"
 

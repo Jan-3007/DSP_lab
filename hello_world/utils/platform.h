@@ -64,27 +64,37 @@ extern uint32_t* get_new_rx_buffer_ptr();
 
 
 // Converts a uint32_t audio sample into two int16_t audio samples (left and right audio channel)
+// for arrays of length BLOCK_SIZE
 inline
 void convert_audio_sample_to_2ch(
-    uint32_t* audio_sample,         // input
-    int16_t* left_sample,           // output
-    int16_t* right_sample           // output
+    uint32_t input[BLOCK_SIZE],                 // input
+    int16_t left_channel[BLOCK_SIZE],           // output
+    int16_t right_channel[BLOCK_SIZE]           // output
     )
 {
-    *left_sample = static_cast<int16_t>(*audio_sample >> 16);
-    *right_sample = static_cast<int16_t>(*audio_sample);
+    for(uint32_t n = BLOCK_SIZE; n > 0; n--)
+    {
+        *left_channel++ = static_cast<int16_t>( static_cast<uint16_t>(*input >> 16) );
+        *right_channel++ = static_cast<int16_t>( static_cast<uint16_t>(*input) );
+        input++;
+    }
 }
 
 // Converts two int16_t audio samples (left and right audio channel) into a uint32_t audio sample
+// for arrays of length BLOCK_SIZE
 inline
 void convert_2ch_to_audio_sample(
-    int16_t* left_sample,           // input
-    int16_t* right_sample,          // input
-    uint32_t* audio_sample          // output
+    int16_t left_channel[BLOCK_SIZE],           // input
+    int16_t right_channel[BLOCK_SIZE],          // input
+    uint32_t output[BLOCK_SIZE]                 // output
     )
 {
-    uint32_t left_temp = static_cast<uint32_t>(*left_sample);
-    uint32_t right_temp = static_cast<uint32_t>(*right_sample);
-    *audio_sample = (left_temp << 16) | right_temp;
+    for(uint32_t n = BLOCK_SIZE; n > 0; n--)
+    {
+        uint32_t left_temp = static_cast<uint32_t>( static_cast<uint16_t>(*left_channel) );
+        uint32_t right_temp = static_cast<uint32_t>( static_cast<uint16_t>(*right_channel) );
+        *output++ = (left_temp << 16) | right_temp;
+        left_channel++;
+        right_channel++;
+    }
 }
-

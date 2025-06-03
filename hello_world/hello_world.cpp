@@ -6,75 +6,74 @@
 CircularBuffer rx_buffer;
 CircularBuffer tx_buffer;
 
+// the following arrays/buffers are required in order to loop the data from the input to the output
+uint32_t in[BLOCK_SIZE];
+uint32_t out[BLOCK_SIZE];
+int16_t left_in[BLOCK_SIZE];
+int16_t right_in[BLOCK_SIZE];
+int16_t left_out[BLOCK_SIZE];
+int16_t right_out[BLOCK_SIZE];
+
 
 int main()
 {
     // initialze whole platform, starts DMA
     init_platform(115200, hz32000, line_in);
 
+    debug_printf("%s, %s\n", __DATE__, __TIME__);
+
     // function calls surrounded by IF_DEBUG() will be removed when building a release
     IF_DEBUG(debug_printf("Hello World!\n"));
-    debug_printf("%s, %s\n", __DATE__, __TIME__);
 
     // init test pin P10; CN10, labelled as A3
     gpio_set(TEST_PIN, LOW);
 
+    // initialize buffers
+    rx_buffer.init();
+    tx_buffer.init();
+
+    memset(in, 0, sizeof(in));
+    memset(out, 0, sizeof(out));
+
+
     // start I2S, call just before your main loop
+    // this command starts the DMA, which will begin transferring data to and from the rx_buffer and tx_buffer
     platform_start();
 
-    int i = 0;
     while(true)
     {
-        // the following arrays are necessary to be able to process the audio signal
-        uint32_t input[BLOCK_SIZE];
-        uint32_t output[BLOCK_SIZE];
-        int16_t left_input[BLOCK_SIZE];
-        int16_t right_input[BLOCK_SIZE];
-        int16_t left_output[BLOCK_SIZE];
-        int16_t right_output[BLOCK_SIZE];
-
         // step 1: read block of samples from input buffer
-        while(!rx_buffer.read(input));
+        while(!rx_buffer.read(in));
 
         // blue LED is used to visualize (processing time)/(sample time)
         gpio_set(LED_B, LOW);			// LED_B on
         gpio_set(TEST_PIN, HIGH);       // Test Pin High
 
         // step 2: split samples into two channels
-        for(uint32_t i = BLOCK_SIZE; i > 0; i--)
-        {
-            convert_audio_sample_to_2ch(input, left_input, right_input);
-        }
+        convert_audio_sample_to_2ch(in, left_in, right_in);
 
 
         // step 3: process the audio channels
-        //      3.1: convert from int to float, see CMSIS_DSP
+        //      3.1: convert from int to float if necessary, see CMSIS_DSP
         //      3.2: process data
     
         // replace following for-loop with your audio processing
-        for(uint32_t i = BLOCK_SIZE; i > 0; i--)
+        for(uint32_t n = 0; n < BLOCK_SIZE; n++)
         {
-            left_output[i] = left_input[i];
-            right_output[i] = right_input[i];
+            left_out[n] = left_in[n];
+            right_out[n] = right_in[n];
         }
-        //      3.3: convert from float to int, see CMSIS_DSP
+        //      3.3: convert from float to int if necessary, see CMSIS_DSP
         
 
         // step 4: merge two channels into one sample
-        for(uint32_t i = BLOCK_SIZE; i > 0; i--)
-        {
-            convert_2ch_to_audio_sample(left_output, right_output, output);
-        }
+        convert_2ch_to_audio_sample(left_out, right_out, out);
 
         // step 5: write block of samples to output buffer
-        while(!tx_buffer.write(output));
+        while(!tx_buffer.write(out));
 
         gpio_set(LED_B, HIGH);			// LED_B off
         gpio_set(TEST_PIN, LOW);        // Test Pin Low
-
-        // print value of i, for initial testing purposes only
-        IF_DEBUG(debug_printf("i = %d\n", i));
-        i++;
     }
 
     // fail-safe, never return from main on a microcontroller
@@ -88,7 +87,7 @@ int main()
 // the following functions are called, when the DMA has finished transferring one block of samples and needs a new memory address to write/read to/from
 
 // prototype defined in platform.h
-// get new memory address to read from and send data to DAC
+// get new memory address to new data to send to DAC
 uint32_t* get_new_tx_buffer_ptr()
 {
     uint32_t* temp = tx_buffer.get_read_ptr();
@@ -100,7 +99,7 @@ uint32_t* get_new_tx_buffer_ptr()
 }
 
 // prototype defined in platform.h
-// get new memory address to write new data from ADC
+// get new memory address to write new data received from ADC
 uint32_t* get_new_rx_buffer_ptr()
 {
     uint32_t* temp = rx_buffer.get_write_ptr();
