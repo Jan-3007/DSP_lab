@@ -6,6 +6,7 @@
 CircularBuffer rx_buffer;
 CircularBuffer tx_buffer;
 
+
 // the following arrays/buffers are required in order to loop the data from the input to the output
 uint32_t in[BLOCK_SIZE];
 uint32_t out[BLOCK_SIZE];
@@ -17,15 +18,16 @@ int16_t right_out[BLOCK_SIZE];
 
 int main()
 {
-    // initialze whole platform, starts DMA
+    // initialze whole platform, does not start DMA
     init_platform(115200, hz32000, line_in);
 
+    // use debug_printf() to send data to a Serial Monitor
     debug_printf("%s, %s\n", __DATE__, __TIME__);
 
-    // function calls surrounded by IF_DEBUG() will be removed when building a release
+    // function calls surrounded by IF_DEBUG() will be removed when building a Release
     IF_DEBUG(debug_printf("Hello World!\n"));
 
-    // init test pin P10; CN10, labelled as A3
+    // init test pin P10 to LOW; can be found on the board as part of the connector CN10, Pin is labelled as A3
     gpio_set(TEST_PIN, LOW);
 
     // initialize buffers
@@ -56,6 +58,7 @@ int main()
         // step 3: process the audio channels
         //      3.1: convert from int to float if necessary, see CMSIS_DSP
         //      3.2: process data
+        //      3.3: convert from float to int if necessary, see CMSIS_DSP
     
         // replace following for-loop with your audio processing
         for(uint32_t n = 0; n < BLOCK_SIZE; n++)
@@ -63,7 +66,6 @@ int main()
             left_out[n] = left_in[n];
             right_out[n] = right_in[n];
         }
-        //      3.3: convert from float to int if necessary, see CMSIS_DSP
         
 
         // step 4: merge two channels into one sample
@@ -87,7 +89,7 @@ int main()
 // the following functions are called, when the DMA has finished transferring one block of samples and needs a new memory address to write/read to/from
 
 // prototype defined in platform.h
-// get new memory address to new data to send to DAC
+// get new memory address to read new data to send it to DAC
 uint32_t* get_new_tx_buffer_ptr()
 {
     uint32_t* temp = tx_buffer.get_read_ptr();

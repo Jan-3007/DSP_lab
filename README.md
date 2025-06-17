@@ -2,10 +2,10 @@
 # General Information
 
 This is a basic VS Code sample project for the DSP course at H-KA in Karlsruhe, Germany.  
-The original source code is provided by Prof. Dr.-Ing. Christian Langen.  
-This sample project is for __Windows__ and __Linux__.
+This project is compatible with __Windows__ and __Linux__.
 Find all documentation under "docs/". Some downloads are available under "downloads/". All [download links](#download-links) are listed below.
 
+The original source code is provided by Prof. Dr.-Ing. Christian Langen. __Please report any issues on Github.__
 
 
 # Prerequisites for this sample project
@@ -96,23 +96,23 @@ Check for connected USB devices using `lsusb`. See step 6 of section [Windows](#
     - J3: 2-3 
 	- J4: 1-2
 - plug your board into your PC using the USB cable
+- go to "hello_world/.vscode/"
+  - depending on your OS choose between settings.windows.json or settings.linux.json
+  - rename the corresponding file to settings.json (the other file can be deleted)
 - launch "hello_world.code-workspace" (with VS Code)
 - install all recommended extensions, they will be displayed as a notification by VS Code in the bottom right
-- go to "{project_name}/.vscode/"
-  - depending on your OS choose between settings.windows.json or settings.linux.json
-  - rename the corresponding file to settings.json
 - switch to the CMake extension
   - at the same level of each tab to the right is the button to run the corresponding process
   - in each tab you can choose between different options by selecting the button next to it
   - in the _Configure_ tab, select DebugNoOpt as the option and run Configure afterwards
-    - all temporary files for the build process are stored in the "{project_name}/build/" folder, which can be deleted anytime
+    - all temporary files for the build process are stored in the "hello_world/build/" folder, which can be deleted anytime
   - in the _Build_ tab, select DebugNoOpt as the option and run Build afterwards
 - switch to Run and Debug
-  - select "GDB debugger CMSIS-DAP ({project_name})
+  - select "GDB debugger CMSIS-DAP (hello_world)
   - clicking the green play button will flash the program and start the debugger
   - an automatic breakpoint will be set at main()
     - due to a limited number of breakpoints, it can be necessary to disable this
-    - you can do so in "{project_name}/.vscode/launch.jason" by commenting the line: `"runToEntryPoint": "main"`,
+    - you can do so in "hello_world/.vscode/launch.json" by commenting the line: `"runToEntryPoint": "main"`,
   - press F5 or click the green button in the debugger window
 - when playing audio to the input jack, the board should pass the audio undistorted to the output jack
 - now you are ready to set up your own project
@@ -123,7 +123,7 @@ Check for connected USB devices using `lsusb`. See step 6 of section [Windows](#
 - to use this sample project for your own project you have to make some adjustments
 1. copy the entire sample project
 2. rename the folder containing all files with your project name (referred to as {project_name})
-3. go into the folder
+3. navigate into the folder
 4. delete "{project_name}/.git" (it might be a hidden folder)
 5. rename the folder "hello_world" to "{project_name}"
 6. rename "hello_world.code-workspace" to "{project_name}.code-workspace"
@@ -166,7 +166,7 @@ The following instructions include programs which can be accessed by installing 
 3. set J4 = 1-2
 4. set J1 closed
 5. plug the board into your PC by using USB CN2
-6. check COM Port in Device Manager
+6. check COM Port of the device "USBVCOM" in Device Manager
     - if not present, run "USBVCOM Driver Installer.msi" from "FM4S6E2GMKitSetup_RevSB"
 7. Run USBDirect, select MB9AF312K, the correct COM port and find "mb9af31xk_cmsis_dap_v25.srec" in "downloads/MB9AF312K_FW/"
 8. click "Full Operation" (note: when reset required, unplug and replug USB and quickly press OK)

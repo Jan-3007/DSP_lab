@@ -21,7 +21,8 @@
  * 	    sample_rate: hz8000, hz32000, hz48000 or hz96000, used for I2S and CODEC
  * 	    audio_in: Selects line_in or mic_in of the CODEC
  */
-void init_platform(
+void 
+init_platform(
     uint32_t baud_rate, 
     sampling_rate sample_rate, 
     audio_input audio_in
@@ -45,7 +46,9 @@ void init_platform(
 	init_dstc();
 }
 
-void platform_start()
+
+void 
+platform_start()
 {
 	I2s_StartClk(&I2S0);						// I2SEN = 1, clock to I2S macro disabled
 
@@ -64,7 +67,8 @@ void platform_start()
  *      codec_sample_rate: 8 , 32, 44,1 or 48 KHz 
  *      audioIn: line in or mic in
  */
-void init_codec(
+void 
+init_codec(
     sampling_rate codec_sample_rate, 
     audio_input audio_in
     )
@@ -102,7 +106,8 @@ stc_dstc_des0123456_t stcDES[2];     // Instance for DSTC Descriptors 0 - 4
 /* 
  * Configures DSTC channel 0 to transfer data from memory to I2S TX, and channel 1 from I2S RX to memory.
  */
-void init_dstc()
+void 
+init_dstc()
 {
 	stc_dstc_config_t stcDstcConfig;	// DSTC config structure
 
@@ -224,7 +229,8 @@ void init_dstc()
 }
 
 // DSTC ISR for TX 
-void isr_tx()
+void 
+isr_tx()
 {
     // transfer is done
     // get new buffer address to read from
@@ -244,7 +250,8 @@ void isr_tx()
 }
 
 // DSTC ISR for RX
-void isr_rx()
+void 
+isr_rx()
 {
     // transfer is done
     // get new buffer address to write to
@@ -272,7 +279,8 @@ void isr_rx()
  * Input: 
  *      sample_rate: hz8000, hz32000, hz48000 or hz96000
  */
-void init_I2S0(sampling_rate sample_rate)
+void 
+init_I2S0(sampling_rate sample_rate)
 {
 	stc_i2s_irq_en_t stci2s0irqen; 		// i2s irq enable structure
 	stc_i2s_config_t stci2s0Cfg;		// i2s config structure
@@ -429,7 +437,8 @@ void init_I2S0(sampling_rate sample_rate)
  * INPUT:
  *      baud_rate: Choose appropriate value, typical values for a pc system are 921600, 460800, 230400, 115200 etc.
  */
-void init_uart0(uint32_t baud_rate)
+void 
+init_uart0(uint32_t baud_rate)
 {
 	stc_mfs_uart_config_t stcMfsUartCfg; // Instantiate UART config structure
 	
@@ -482,7 +491,8 @@ void init_uart0(uint32_t baud_rate)
  * Initializes the gpio ports for the 3 color LED, the user button and
  * the port for timing measurements (P10)
  */
-void init_gpio(void)
+void 
+init_gpio(void)
 {
 	// init the ports the 3 color LED is connected to: Output with initial level high
 	Gpio1pin_InitOut(GPIO1PIN_P1A, Gpio1pin_InitVal(HIGH));  	// Red color off

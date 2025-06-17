@@ -37,3 +37,4 @@ public:
     uint32_t*
     get_write_ptr();
 };
+

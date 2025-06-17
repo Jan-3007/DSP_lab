@@ -40,7 +40,6 @@ list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/PDL")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/utils")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/device")
 
-
 # build CMSIS-DSP library
 add_subdirectory("${CMSISDSP}/Source" lib_dsp)
 target_compile_definitions(CMSISDSP PRIVATE ${compile_definitions} )
@@ -55,10 +54,10 @@ add_executable(${target_name})
 target_compile_definitions(${target_name} PRIVATE ${compile_definitions} )
 target_include_directories(${target_name} PRIVATE ${include_directories} )
 
+
 #
 # linker script
 #
-
 add_linker_script(${target_name} ${CMAKE_CURRENT_LIST_DIR}/device/S6E2CCAJOA.ld.cc)
 
 
@@ -89,9 +88,6 @@ VERBATIM
 )
 
 
-
-
-
 #
 # add sources to target
 #
@@ -118,7 +114,7 @@ target_sources(${target_name} PRIVATE
     PDL/wm8731.c
     )
 
-# add util files to the project
+# add utils files to the project
 target_sources(${target_name} PRIVATE
     utils/crt_dummy_syscalls.c
     utils/platform.cpp
@@ -131,6 +127,3 @@ target_sources(${target_name} PRIVATE
     hello_world.cpp
     hello_world_circ_buffer.cpp
     )
-
-
-

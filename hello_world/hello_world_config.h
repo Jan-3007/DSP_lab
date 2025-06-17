@@ -8,11 +8,8 @@
 #define DISABLE 0
 
 
-
-// must be between 1 - 256 (inclusive) 
-// (or multiple of 256 (e.g. 512, 768, 1024, ...))
+// must be between 1 .. 256 (inclusive) 
 #define BLOCK_SIZE 64 
-
 
 
 // FiFo Buffer
