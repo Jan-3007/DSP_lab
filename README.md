@@ -1,20 +1,27 @@
 
 # General Information
 
-This is a basic VS Code sample project for the DSP course at H-KA in Karlsruhe, Germany.  
+This is a VS Code project template for the DSP course at H-KA in Karlsruhe, Germany.  
 This project is compatible with __Windows__ and __Linux__.
-Find all documentation under "docs/". Some downloads are available under "downloads/". All [download links](#download-links) are listed below.
+You can find all documentation under "docs/". Some downloads are available under "downloads/". All [download links](#download-links) are listed below.
 
 The original source code is provided by Prof. Dr.-Ing. Christian Langen. __Please report any issues on Github.__
 
 
 # Prerequisites for this sample project
 
+## Visual Studio Code
 This project is for the Visual Studio Code IDE. It therefore needs to be installed.
+Official Website: https://code.visualstudio.com/
+
+Install on Windows using winget: `winget install --interactive Microsoft.VisualStudioCode`
+Install on Ubuntu using apt: `apt install vscode`
+
+
 
 ## Windows
 ### Download and installation using Windows Powershell
-1. open Powershell as Administrator
+1. run Powershell as Administrator
 2. install all required packages using the following commands
 ```
 winget install Kitware.cmake -v 3.30.5
@@ -51,8 +58,8 @@ rm 'C:\Program Files\OpenOCD\v0.12.0\openocd-v0.12.0-i686-w64-mingw32.tar.gz'
     - unzip and copy/move to recommended location: "C:/Program Files/CMake/"
     - if deviating, edit path in "{project_name}/.vscode/settings.windows.json"
 3. Ninja
-    - if not installed yet, run `winget install Ninja-build.Ninja -v 1.12.1`
-4. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
+    - if not installed yet, open a command line terminal and run `winget install Ninja-build.Ninja -v 1.12.1`
+4. Install "CMSIS-DAP Driver.msi", from ["FM4S6E2GMKitSetup_RevSB"](#download-links) by unpacking the .exe
 5. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
 >[!NOTE]
@@ -84,7 +91,7 @@ To install GCC:     //???
 - copy/move folder to "/usr/bin/" using `cp -R arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi /usr/bin/`
 - if deviating, edit path in "{project_name}/.vscode/launch.json" and "{project_name}/cmake/toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 
-Check for connected USB devices using `lsusb`. See step 6 of section [Windows](#windows).
+Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" using the command `lsusb`, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
 
 
@@ -132,10 +139,11 @@ Check for connected USB devices using `lsusb`. See step 6 of section [Windows](#
    - replace "hello_world" with "{project_name}"
 8. go into the folder {project_name}
 9. step out of the current folder and launch {project_name}.code-workspace (with VS Code)
+
 The following steps can be made within in VS Code
-10. rename all "hello_world".cpp and "hello_world".h files with your {project_name} if necessary, if you do so, pay attention to the next step
-11. every C/C++ source file (.cpp or .cc) needs to be listed in the `target_sources()` command inside the "CMakeLists.txt" file, see EOF (end of file)
-12. open "CMakeLists.txt"
+10.  rename all "hello_world".cpp and "hello_world".h files with your {project_name} if necessary, if you do so, pay attention to the next step
+11.  every C/C++ source file (.cpp or .cc) needs to be listed in the `target_sources()` command inside the "CMakeLists.txt" file, see EOF (end of file)
+12.  open "CMakeLists.txt"
     - search for the `project()` command (line 21) and replace "hello_world" with {project_name}
 
 >[!NOTE]
@@ -160,7 +168,7 @@ You are ready to start your own project!
 
 
 # Flash CMSIS-DAP FW on MB9AF312K
-The following instructions include programs which can be accessed by installing the "FM4S6E2GMKitSetup_RevSB.exe", see [download links](#download-links). This will install more programs then necessary, to avoid this, unpack the .exe inside a folder and execute only the necessary programs.
+The following instructions include programs (it is recommended to use a Windows PC) which can be accessed by installing the "FM4S6E2GMKitSetup_RevSB.exe", see [download links](#download-links). This will install more programs then necessary, to avoid this, unpack the .exe inside a folder and execute only the necessary programs.
 1. install "FLASH USB DIRECT Programmer.msi" from "FM4S6E2GMKitSetup_RevSB"
 2. set J3: 2-3 
 3. set J4 = 1-2
