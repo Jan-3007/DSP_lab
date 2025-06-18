@@ -1,5 +1,5 @@
 {
-    "cmake.automaticReconfigure": false,
+    "cmake.automaticReconfigure": true,
     "cmake.configureOnEdit": false,
     "cmake.configureOnOpen": false,
     "cmake.deleteBuildDirOnCleanConfigure": true,

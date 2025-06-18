@@ -21,8 +21,7 @@
 
             "linux": {
                 // location of GDB and other tools
-                //"armToolchainPath": "/opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin", ???
-                "armToolchainPath": "/usr/bin/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin",
+                "armToolchainPath": "/usr/bin/",
         
                 "serverpath": "/usr/bin/openocd",
                 "searchDir": [ "/usr/share/openocd/scripts" ],
@@ -44,43 +43,6 @@
             //"showDevDebugTimestamps": true,
 
             "runToEntryPoint": "main",
-        },
-
-
-//??? needs an update
-        {
-            "name": "GDB debugger J-Link",
-            "type": "cortex-debug",
-            "request": "launch",    // launch or attach
-            "servertype": "jlink",
-            "serialNumber": "",     // If you have more than one J-Link probe, add the serial number here.
-            "interface": "swd",     // swd or jtag
-
-            "device": "S6E2CCAJ0A",
-
-            //"runToEntryPoint": "main",
-            //"runToEntryPoint": "Reset_Handler",
-
-            "windows": {
-                // Segger GDB server
-                "serverpath": "${env:ProgramFiles}/SEGGER/JLink_V810c/JLinkGDBServerCL.exe",
-                "serverArgs": ["-gui"], // Additional arguments to pass to GDB Server command line
-
-                // location of GDB and other tools
-                "armToolchainPath": "C:/GCC/arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/bin",
-            },
-
-
-            // The following settings use commands expanded by CMake Tools extension.
-            // See also https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/cmake-settings.md
-            "executable": "${command:cmake.launchTargetPath}",  // current .axf file
-            "cwd": "${command:cmake.buildDirectory}",   // directory where CMake cache files are located
-
-
-            // cortex-debug logging
-            "showDevDebugOutput": "raw",  // one of: "raw", "parsed", "both", "vscode"
-            //"showDevDebugTimestamps": true,
-        },
-
+        }
     ]
 }
