@@ -60,7 +60,7 @@ int main()
         //      3.2: process data
         //      3.3: convert from float to int if necessary, see CMSIS_DSP
     
-        // replace following for-loop with your audio processing
+        // remove following for-loop when implementing your own audio processing
         for(uint32_t n = 0; n < BLOCK_SIZE; n++)
         {
             left_out[n] = left_in[n];

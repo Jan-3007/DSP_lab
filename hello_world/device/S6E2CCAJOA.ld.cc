@@ -218,7 +218,7 @@ SECTIONS
     *(.data)
     *(.data.*)
 
-    . = ALIGN(4);           /* ??? move to .text */
+    . = ALIGN(4);
     /* preinit data */
     PROVIDE_HIDDEN (__preinit_array_start = .);
     KEEP(*(.preinit_array))
