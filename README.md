@@ -34,14 +34,7 @@ Official Website: https://code.visualstudio.com/
         - file: "openocd-v0.12.0-i686-w64-mingw32.tar.gz"
     - unzip and copy/move to recommended location: "C:/Program Files/OpenOCD/v0.12.0/"
     - if deviating, edit path in "{project_name}/.vscode/launch.json"
-    - for the command line:
-```
-mkdir 'C:\Program Files\OpenOCD\v0.12.0'
-Invoke-WebRequest https://github.com/openocd-org/openocd/releases/download/v0.12.0/openocd-v0.12.0-i686-w64-mingw32.tar.gz -OutFile 'C:\Program Files\OpenOCD\v0.12.0\openocd-v0.12.0-i686-w64-mingw32.tar.gz'
-tar -xvf 'C:\Program Files\OpenOCD\v0.12.0\openocd-v0.12.0-i686-w64-mingw32.tar.gz' -C 'C:\Program Files\OpenOCD\v0.12.0' 
-rm 'C:\Program Files\OpenOCD\v0.12.0\openocd-v0.12.0-i686-w64-mingw32.tar.gz'
-```
-3. CMake
+2. CMake
     - recommended version: 3.30.5, at least 3.20
     - download from [website](https://github.com/Kitware/CMake/releases/tag/v3.30.5)
         - file: "cmake-3.30.5-windows-x86_64.zip"
@@ -79,6 +72,7 @@ sudo ln -s /usr/bin/gdb-multiarch /usr/bin/arm-none-eabi-gdb
 ```
 
 For Ubuntu 22.04 may it be necessary to install `libncursesw5`.
+
 
 Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" using the command `lsusb`, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
