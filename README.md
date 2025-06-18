@@ -12,10 +12,9 @@ The original source code is provided by Prof. Dr.-Ing. Christian Langen. __Pleas
 
 ## Visual Studio Code
 This project is for the Visual Studio Code IDE. It therefore needs to be installed.
+
 Official Website: https://code.visualstudio.com/
 
-Install on Windows using winget: `winget install --interactive Microsoft.VisualStudioCode`
-Install on Ubuntu using apt: `apt install vscode`
 
 
 
@@ -68,28 +67,27 @@ rm 'C:\Program Files\OpenOCD\v0.12.0\openocd-v0.12.0-i686-w64-mingw32.tar.gz'
 
 
 ## Linux
+  
+Required packages with their recommended versions are: 
+- GCC (version: 13.3.rel1)
+- OpenOCD (version: 0.12.0)
+- CMake (version: 3.30.5)
+- Ninja (version: 1.12.1)
 
-The following is specifically for the apt package manager (tested with Ubuntu 22.04 LTS).  
-Required packages are: GCC, OpenOCD, CMake and Ninja.
-Run the following commands:
+The following commands are specifically for the apt package manager (tested with Ubuntu 24.04 LTS). These may install older versions but should work as well.
+The last command creates a symlink to make gdb-multiarch compatible with this project.
 
 ```
 sudo apt update
 sudo apt install openocd
 sudo apt install cmake
 sudo apt install ninja-build
-sudo apt install libncursesw5
-sudo apt install gcc-arm-none-eabi=13.3.rel1-1
+sudo apt install gcc-arm-none-eabi
+sudo apt install gdb-multiarch
+sudo ln -s /usr/bin/gdb-multiarch /usr/bin/arm-none-eabi-gdb
 ```
 
-To install GCC:     //???
-- download from [website](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
-    - section: "x86_64 Linux hosted cross toolchains"
-    - subsection: "AArch32 bare-metal target (arm-none-eabi)"
-    - file: "arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz"
-- unzip folder
-- copy/move folder to "/usr/bin/" using `cp -R arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi /usr/bin/`
-- if deviating, edit path in "{project_name}/.vscode/launch.json" and "{project_name}/cmake/toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
+For Ubuntu 22.04 may it be necessary to install `libncursesw5`.
 
 Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" using the command `lsusb`, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
