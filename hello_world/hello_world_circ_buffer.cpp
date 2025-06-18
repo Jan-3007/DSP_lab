@@ -17,7 +17,7 @@ CircularBuffer::init()
 bool 
 CircularBuffer::read(uint32_t output[BLOCK_SIZE])
 {
-    // lock out ISR
+    // lock out ISR, a Mutex or Semaphore can be used as well
     NVIC_DisableIRQ(DSTC_HW_IRQn);
 
     // check if buffer is empty
@@ -104,7 +104,7 @@ CircularBuffer::get_read_ptr()
 bool 
 CircularBuffer::write(uint32_t input[BLOCK_SIZE])
 {
-    // lock out ISR
+    // lock out ISR, a Mutex or Semaphore can be used as well
     NVIC_DisableIRQ(DSTC_HW_IRQn);
 
     // check if buffer is full
