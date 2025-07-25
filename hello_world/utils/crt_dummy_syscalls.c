@@ -1,3 +1,7 @@
+/*
+ * Author: Jan Eberhardt
+ */
+
 #include <errno.h>
 #include <sys/stat.h>
 

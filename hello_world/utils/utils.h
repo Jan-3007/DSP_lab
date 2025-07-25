@@ -2,7 +2,9 @@
  * utils.h
  *
  *  Created on: 07.02.2019
- *      Author: Thomas Erforth
+ *  original Author: Thomas Erforth
+ * 
+ * Modified and enhanced by: Jan Eberhardt
  */
 
 #pragma once
@@ -31,7 +33,7 @@ void delay_us(unsigned int us);
 void delay_cycles(unsigned int cycles);
 
 
-// for the pseudo random sequence generator
+// pseudo random sequence generator
 #define NOISELEVEL 8000
 
 short pseudo_random_sequence_generator(void);

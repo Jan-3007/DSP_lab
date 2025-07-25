@@ -3,7 +3,9 @@
  *
  *
  *  Created on: 07.02.2019
- *      Author: Thomas Erforth
+ *  original author: Thomas Erforth
+ * 
+ * Modified and enhanced by: Jan Eberhardt
  */
 
 #include "global.h"

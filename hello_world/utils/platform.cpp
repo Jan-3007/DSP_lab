@@ -10,6 +10,7 @@
  * 						buffer sizes 1 - 256 plus multiples of 256
  * ter, July 21, 2019: 	Declarations for dma buffers, DSTC and slider app added (moved from platform.h)
  *
+ * Modified and enhanced by: Jan Eberhardt
  */
 
 #include "global.h"

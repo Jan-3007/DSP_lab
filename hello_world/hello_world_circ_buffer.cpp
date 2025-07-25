@@ -1,4 +1,8 @@
-#include "global.h"
+/*
+ * Author: Jan Eberhardt
+ */
+
+ #include "global.h"
 
 
 // ctor

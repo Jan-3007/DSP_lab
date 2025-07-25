@@ -1,4 +1,8 @@
-#pragma once
+/*
+ * Author: Jan Eberhardt
+ */
+
+ #pragma once
 
 
 // GPIO

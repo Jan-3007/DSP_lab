@@ -1,3 +1,6 @@
+#
+# Author: Jan Eberhardt
+#
 
 #
 # Add a linker script to the given target.

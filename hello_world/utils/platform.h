@@ -9,10 +9,11 @@
  * ter, July 21, 2019: Declarations for dma_buffers, DSTC and slider app moved to platform.c and declared extern here
  * 					   Define directive for PING / PONG added
  *
+ * Modified and enhanced by: Jan Eberhardt
  */
 #pragma once
 
-/*! This enum describes the different sampling frequency setup of the CODEC */
+/* This enum describes the different sampling frequency setup of the CODEC */
 typedef enum
 {
     hz8000 	= 0x0C,  // 8kHz from 12.288MHz MCLK
@@ -21,7 +22,7 @@ typedef enum
     hz96000 = 0x1C,  // 96kHz from 12.288MHz MCLK
 } sampling_rate;
 
-/*! This enum describes the different input audio jacks of the CODEC */		
+/* This enum describes the different input audio jacks of the CODEC */		
 typedef enum
 {
 	line_in = 0x12,  // Select Line In and disable bypass

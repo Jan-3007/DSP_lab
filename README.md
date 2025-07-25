@@ -123,7 +123,7 @@ Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" 
 8. go into the folder {project_name}
 9. step out of the current folder and launch {project_name}.code-workspace (with VS Code)
 
-The following steps can be made within in VS Code
+The following steps can be made within VS Code
 10.  rename all "hello_world".cpp and "hello_world".h files with your {project_name} if necessary, if you do so, pay attention to the next step
 11.  every C/C++ source file (.cpp or .cc) needs to be listed in the `target_sources()` command inside the "CMakeLists.txt" file, see EOF (end of file)
 12.  open "CMakeLists.txt"

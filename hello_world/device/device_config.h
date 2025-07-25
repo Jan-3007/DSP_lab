@@ -1,3 +1,7 @@
+/*
+ * Author: Jan Eberhardt
+ */
+
 #pragma once
 
 

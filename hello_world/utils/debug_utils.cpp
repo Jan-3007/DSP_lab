@@ -1,3 +1,7 @@
+/*
+ * Author: Jan Eberhardt
+ */
+
 #include "global.h"
 #include <cstdarg>
 
@@ -15,6 +19,7 @@ void write_uart0(const char* message)
 }
 
 
+// send a string via UART to the USB host, can be used equal to printf()
 void debug_printf(const char* fmt, ...)
 {
     std::va_list args;

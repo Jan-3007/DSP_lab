@@ -1,3 +1,7 @@
+/*
+ * Author: Jan Eberhardt
+ */
+
 #include "global.h"
 
 
@@ -30,7 +34,7 @@ int main()
     // init test pin P10 to LOW; can be found on the board as part of the connector CN10, Pin is labelled as A3
     gpio_set(TEST_PIN, LOW);
 
-    // initialize buffers
+    // initialize circular buffers
     rx_buffer.init();
     tx_buffer.init();
 
@@ -44,7 +48,7 @@ int main()
 
     while(true)
     {
-        // step 1: read block of samples from input buffer
+        // step 1: read block of samples from input buffer, data is copied from rx_buffer to in
         while(!rx_buffer.read(in));
 
         // blue LED is used to visualize (processing time)/(sample time)
@@ -71,7 +75,7 @@ int main()
         // step 4: merge two channels into one sample
         convert_2ch_to_audio_sample(left_out, right_out, out);
 
-        // step 5: write block of samples to output buffer
+        // step 5: write block of samples to output buffer, data is copied from out to tx_buffer
         while(!tx_buffer.write(out));
 
         gpio_set(LED_B, HIGH);			// LED_B off

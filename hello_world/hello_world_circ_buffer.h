@@ -1,4 +1,8 @@
-#pragma once
+/*
+ * Author: Jan Eberhardt
+ */
+
+ #pragma once
 
 
 class CircularBuffer
@@ -20,6 +24,7 @@ public:
     init();
 
     // read a block of samples of BLOCK_SIZE from buffer
+    // data is copied from internal buffer_[] to output[]
     // returns false if there is nothing to read
     bool
     read(uint32_t output[BLOCK_SIZE]);
@@ -29,6 +34,7 @@ public:
     get_read_ptr();
 
     // write a block of samples of BLOCK_SIZE to buffer
+    // data is copied from input[] to internal buffer_[]
     // returns false if data cannot be written
     bool
     write(uint32_t input[BLOCK_SIZE]);

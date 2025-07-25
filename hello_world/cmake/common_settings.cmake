@@ -1,4 +1,8 @@
 #
+# Author: Jan Eberhardt
+#
+
+#
 # settings which apply to the project
 #
 
