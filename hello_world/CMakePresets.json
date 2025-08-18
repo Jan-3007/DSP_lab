@@ -59,6 +59,102 @@
             "name": "Release",
             "configurePreset": "Release",
             "verbose": false
+        },
+        {
+            "name": "Clean Debug",
+            "inherits": "Debug",
+            "cleanFirst": true
+        },
+        {
+            "name": "Clean DebugNoOpt",
+            "inherits": "DebugNoOpt",
+            "cleanFirst": true
+        },
+        {
+            "name": "Clean Release",
+            "inherits": "Release",
+            "cleanFirst": true
         }
+    ],
+    "workflowPresets": [
+        {
+            "name": "Debug",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "Debug"
+                },
+                {
+                    "type": "build",
+                    "name": "Debug"
+                }
+            ]
+        },
+        {
+            "name": "DebugNoOpt",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "DebugNoOpt"
+                },
+                {
+                    "type": "build",
+                    "name": "DebugNoOpt"
+                }
+            ]
+        },
+        {
+            "name": "Release",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "Release"
+                },
+                {
+                    "type": "build",
+                    "name": "Release"
+                }
+            ]
+        },
+        {
+            "name": "Rebuild Debug",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "Debug"
+                },
+                {
+                    "type": "build",
+                    "name": "Clean Debug"
+                }
+            ]
+        },
+        {
+            "name": "Rebuild DebugNoOpt",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "DebugNoOpt"
+                },
+                {
+                    "type": "build",
+                    "name": "Clean DebugNoOpt"
+                }
+            ]
+        },
+        {
+            "name": "Rebuild Release",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "Release"
+                },
+                {
+                    "type": "build",
+                    "name": "Clean Release"
+                }
+            ]
+        }
+
     ]
 }
