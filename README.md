@@ -17,9 +17,8 @@ Official Website: https://code.visualstudio.com/
 
 
 
-
-## Windows
-### Manual downloads and installation
+## Manual downloads and installation
+### Windows
 1. GCC
     - recommended release: 13.3 rel1
     - download from [website](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
@@ -50,8 +49,7 @@ Official Website: https://code.visualstudio.com/
 
 
 
-## Linux
-  
+### Linux
 Required packages with their recommended versions are: 
 - GCC (version: 13.3.rel1)
 - OpenOCD (version: 0.12.0)
@@ -71,7 +69,7 @@ sudo apt install gdb-multiarch
 sudo ln -s /usr/bin/gdb-multiarch /usr/bin/arm-none-eabi-gdb
 ```
 
-For Ubuntu 22.04 may it be necessary to install `libncursesw5`.
+For Ubuntu 22.04, it may be necessary to install `libncursesw5`.
 
 
 Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" using the command `lsusb`, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
@@ -80,36 +78,34 @@ Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" 
 
 
 # Getting started
-
 - jumper configuration:
 	- J1, J2 open
     - J3: 2-3 
 	- J4: 1-2
-- plug your board into your PC using the USB cable
+- plug your board (CN2 port) into your PC using the USB cable
 - go to "hello_world/.vscode/"
   - depending on your OS choose between settings.windows.json or settings.linux.json
   - rename the corresponding file to settings.json (the other file can be deleted)
 - launch "hello_world.code-workspace" (with VS Code)
-- install all recommended extensions, they will be displayed as a notification by VS Code in the bottom right
+- install all recommended extensions, they will be displayed as notifications by VS Code in the bottom right
 - switch to the CMake extension
-  - at the same level of each tab to the right is the button to run the corresponding process
-  - in each tab you can choose between different options by selecting the button next to it
+  - when hovering with the mouse over each process step, a button to run the process will be displayed to the right of the process name
+  - in each process step you can choose between different options by selecting the button next to it
   - in the _Configure_ tab, select DebugNoOpt as the option and run Configure afterwards
     - all temporary files for the build process are stored in the "hello_world/build/" folder, which can be deleted anytime
   - in the _Build_ tab, select DebugNoOpt as the option and run Build afterwards
 - switch to Run and Debug
-  - select "GDB debugger CMSIS-DAP (hello_world)
+  - select "GDB debugger CMSIS-DAP (hello_world)"
   - clicking the green play button will flash the program and start the debugger
   - an automatic breakpoint will be set at main()
     - due to a limited number of breakpoints, it can be necessary to disable this
     - you can do so in "hello_world/.vscode/launch.json" by commenting the line: `"runToEntryPoint": "main"`,
-  - press F5 or click the green button in the debugger window
+  - press F5 or click the green button in the debugger window to continue
 - when playing audio to the input jack, the board should pass the audio undistorted to the output jack
-- now you are ready to set up your own project
+- now you are ready to create your own project
 
 
 # Create your own project
-
 - to use this sample project for your own project you have to make some adjustments
 1. copy the entire sample project
 2. rename the folder containing all files with your project name (referred to as {project_name})
@@ -117,7 +113,7 @@ Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" 
 4. delete "{project_name}/.git" (it might be a hidden folder)
 5. rename the folder "hello_world" to "{project_name}"
 6. rename "hello_world.code-workspace" to "{project_name}.code-workspace"
-7. edit "{project_name}.code-workspace" with e.g. Notepad++
+7. edit "{project_name}.code-workspace" with a text editor
    - search for the "path" variable
    - replace "hello_world" with "{project_name}"
 8. go into the folder {project_name}
@@ -125,20 +121,19 @@ Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" 
 
 The following steps can be made within VS Code
 10.  rename all "hello_world".cpp and "hello_world".h files with your {project_name} if necessary, if you do so, pay attention to the next step
-11.  every C/C++ source file (.cpp or .cc) needs to be listed in the `target_sources()` command inside the "CMakeLists.txt" file, see EOF (end of file)
+11.  every C/C++ source file (.cpp or .cc) needs to be listed in the `target_sources()` command inside the "CMakeLists.txt" file, see at EOF (end of file)
 12.  open "CMakeLists.txt"
     - search for the `project()` command (line 21) and replace "hello_world" with {project_name}
 
 >[!NOTE]
-> after changing a CMake file, it is important to Reconfigure using the CMake extension
+> after changing a CMake file, it is important to __Reconfigure__ using the CMake extension
 
-You are ready to start your own project!
+You are ready to start!
 
 
 
 
 # More information
-
 - use `IF_DEBUG(debug_printf())` to send messages to the Serial Port Monitor
     - with `IF_DEBUG()`, `debug_printf()` is automatically disabled in Release build
     - `debug_printf()` can be used exactly as `printf()`
@@ -151,7 +146,7 @@ You are ready to start your own project!
 
 
 # Flash CMSIS-DAP FW on MB9AF312K
-The following instructions include programs (it is recommended to use a Windows PC) which can be accessed by installing the "FM4S6E2GMKitSetup_RevSB.exe", see [download links](#download-links). This will install more programs then necessary, to avoid this, unpack the .exe inside a folder and execute only the necessary programs.
+The following instructions (it is recommended to use a Windows PC) include programs which can be accessed by installing the "FM4S6E2GMKitSetup_RevSB.exe", see [download links](#download-links). This will install more programs then necessary, to avoid this, unpack the .exe inside a folder and execute only the necessary programs.
 1. install "FLASH USB DIRECT Programmer.msi" from "FM4S6E2GMKitSetup_RevSB"
 2. set J3: 2-3 
 3. set J4 = 1-2
@@ -171,7 +166,6 @@ The following instructions include programs (it is recommended to use a Windows 
 
 
 # Flash J-Link FW on MB9AF312K
-
 These instructions should not be needed, but are included for the sake of completeness.  
 Refer to https://www.segger.com/products/debug-probes/j-link/models/other-j-links/j-link-ob-spansion/ for more information.
 1. Install "USBVCOM Driver Installer.msi"
@@ -200,7 +194,6 @@ instructions:
 
 
 # How to use Semihosting
-
 These instructions should not be needed, but are included for the sake of completeness.  
 Refer to the file "downloads/FM4_FilterLab_1_3_Template/Eclipse_Application_Notes_Semihosting.pdf" for more information.
 1. add following code in the file "hello_world/.vscode/launch.json" to the "GDB debugger CMSIS-DAP" configuration
@@ -231,7 +224,6 @@ Refer to the file "downloads/FM4_FilterLab_1_3_Template/Eclipse_Application_Note
 
 
 # Download links
-
 Check the "downloads/" folder of this sample project before downloading.
 
 GCC toolchain:  
