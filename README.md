@@ -75,6 +75,8 @@ For Ubuntu 22.04, it may be necessary to install `libncursesw5`.
 Check if board identifies as "Spansion Inc. Spansion CMSIS-DAP + COM Port" using the command `lsusb`, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 You will need to add your user to a group: `sudo adduser ${USER} dialout`.
 
+Notes: symlink to gdb-multiarch
+		xpack-openocd for linux
 
 
 # Getting started
