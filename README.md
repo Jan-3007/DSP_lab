@@ -40,15 +40,15 @@ Official Website: https://code.visualstudio.com/
     - download from [website](https://github.com/Kitware/CMake/releases/tag/v3.30.5)
         - file: "cmake-3.30.5-windows-x86_64.zip"
     - unzip and copy/move to recommended location: "C:/Program Files/CMake/"
-    - if deviating, edit path in "{project_name}/.vscode/settings.windows.json"
+    - if deviating, edit path in `{project_name}/.vscode/settings.windows.json`
 4. Ninja
     - if not installed yet, open a command line terminal and run `winget install Ninja-build.Ninja -v 1.12.1`
 5. Install "CMSIS-DAP Driver.msi",
-   - download it from "FM4S6E2GMKitSetup_RevSB"(#download-links) and unpack the .exe
-6. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
+   - download it from [FM4S6E2GMKitSetup_RevSB](#download-links) and unpack the .exe
+6. Check if board identifies as `FM-Link/CMSIS-DAP Cypress FM Communications Port` in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
 >[!NOTE]
-> all recommended versions have been tested, using different versions may result in errors
+> All recommended versions have been tested, using different versions may result in errors
 
 
 
@@ -78,8 +78,6 @@ For Ubuntu 22.04, it may be necessary to install `libncursesw5`.
 Check if the board identifies as "Spansion Inc. Spansion CMSIS-DAP + COM Port" using the command `lsusb`, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 You may need to add your user to a group: `sudo adduser ${USER} dialout`.
 
-Notes: symlink to gdb-multiarch
-		xpack-openocd for linux
 
 
 # Getting started
