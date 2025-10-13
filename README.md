@@ -40,7 +40,7 @@ Official Website: https://code.visualstudio.com/
     - download from [website](https://github.com/Kitware/CMake/releases/tag/v3.30.5)
         - file: "cmake-3.30.5-windows-x86_64.zip"
     - unzip and copy/move to recommended location: "C:/Program Files/CMake/"
-    - if deviating, edit path in `{project_name}/.vscode/settings.windows.json`
+    - if deviating, edit path in "{project_name}/.vscode/settings.windows.json"
 4. Ninja
     - if not installed yet, open a command line terminal and run `winget install Ninja-build.Ninja -v 1.12.1`
 5. Install "CMSIS-DAP Driver.msi",
