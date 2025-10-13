@@ -5,7 +5,9 @@ This is a VS Code project template for the DSP course at H-KA in Karlsruhe, Germ
 This project is compatible with __Windows__ and __Linux__.
 You can find all documentation under "docs/". Some downloads are available under "downloads/". All [download links](#download-links) are listed below.
 
-The original source code is provided by Prof. Dr.-Ing. Christian Langen. __Please report any issues on Github.__
+The original source code is provided by Prof. Dr.-Ing. Christian Langen. 
+
+__Please report any issues on Github.__
 
 
 # Prerequisites for this sample project
@@ -38,20 +40,21 @@ Official Website: https://code.visualstudio.com/
     - download from [website](https://github.com/Kitware/CMake/releases/tag/v3.30.5)
         - file: "cmake-3.30.5-windows-x86_64.zip"
     - unzip and copy/move to recommended location: "C:/Program Files/CMake/"
-    - if deviating, edit path in "{project_name}/.vscode/settings.windows.json"
+    - if deviating, edit path in `{project_name}/.vscode/settings.windows.json`
 4. Ninja
     - if not installed yet, open a command line terminal and run `winget install Ninja-build.Ninja -v 1.12.1`
-5. Install "CMSIS-DAP Driver.msi", from ["FM4S6E2GMKitSetup_RevSB"](#download-links) by unpacking the .exe
-6. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
+5. Install "CMSIS-DAP Driver.msi",
+   - download it from [FM4S6E2GMKitSetup_RevSB](#download-links) and unpack the .exe
+6. Check if board identifies as `FM-Link/CMSIS-DAP Cypress FM Communications Port` in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
 >[!NOTE]
-> all recommended versions have been tested, using different versions may result in errors
+> All recommended versions have been tested, using different versions may result in errors
 
 
 
 ### Linux
 Required packages with their recommended versions are: 
-- GCC (version: 13.3.rel1)
+- GCC (version: 13.3.rel1) + GDB-Multiarch 
 - OpenOCD (version: 0.12.0)
 - CMake (version: 3.30.5)
 - Ninja (version: 1.12.1)
@@ -72,8 +75,8 @@ sudo ln -s /usr/bin/gdb-multiarch /usr/bin/arm-none-eabi-gdb
 For Ubuntu 22.04, it may be necessary to install `libncursesw5`.
 
 
-Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" using the command `lsusb`, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
-
+Check if the board identifies as "Spansion Inc. Spansion CMSIS-DAP + COM Port" using the command `lsusb`, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
+You may need to add your user to a group: `sudo adduser ${USER} dialout`.
 
 
 
@@ -83,50 +86,54 @@ Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" 
     - J3: 2-3 
 	- J4: 1-2
 - plug your board (CN2 port) into your PC using the USB cable
-- go to "hello_world/.vscode/"
-  - depending on your OS choose between settings.windows.json or settings.linux.json
-  - rename the corresponding file to settings.json (the other file can be deleted)
-- launch "hello_world.code-workspace" (with VS Code)
+- go to `hello_world/.vscode/`
+  - depending on your OS choose between `settings.windows.json` or `settings.linux.json`
+  - rename the applicable file to `settings.json` (the other file can be deleted)
+- launch `hello_world.code-workspace` (with VS Code)
 - install all recommended extensions, they will be displayed as notifications by VS Code in the bottom right
 - switch to the CMake extension
   - when hovering with the mouse over each process step, a button to run the process will be displayed to the right of the process name
   - in each process step you can choose between different options by selecting the button next to it
-  - in the _Configure_ tab, select DebugNoOpt as the option and run Configure afterwards
-    - all temporary files for the build process are stored in the "hello_world/build/" folder, which can be deleted anytime
-  - in the _Build_ tab, select DebugNoOpt as the option and run Build afterwards
-- switch to Run and Debug
-  - select "GDB debugger CMSIS-DAP (hello_world)"
+    - _DebugNoOpt_: No optimization, best for debugging
+    - _Debug_: Full opimization, debugging limited
+    - _Release_: Full optimization, no debugging possible
+  - in the _Configure_ tab, select "DebugNoOpt" as the option and run _Configure_ afterwards
+    - all temporary files for the build process are stored in the `hello_world/build/` folder, which can be deleted anytime
+  - in the _Build_ tab, select "DebugNoOpt" as the option and run _Build_ afterwards
+- switch to the Run and Debug extension
+  - select `GDB debugger CMSIS-DAP (hello_world)`
   - clicking the green play button will flash the program and start the debugger
   - an automatic breakpoint will be set at main()
     - due to a limited number of breakpoints, it can be necessary to disable this
-    - you can do so in "hello_world/.vscode/launch.json" by commenting the line: `"runToEntryPoint": "main"`,
+    - you can do so in `hello_world/.vscode/launch.json` by commenting the line: `"runToEntryPoint": "main"`
   - press F5 or click the green button in the debugger window to continue
 - when playing audio to the input jack, the board should pass the audio undistorted to the output jack
-- now you are ready to create your own project
+
+You are now ready to create your own project!
 
 
 # Create your own project
-- to use this sample project for your own project you have to make some adjustments
+To use this sample project for your own project you have to make some adjustments.
 1. copy the entire sample project
-2. rename the folder containing all files with your project name (referred to as {project_name})
-3. navigate into the folder
-4. delete "{project_name}/.git" (it might be a hidden folder)
-5. rename the folder "hello_world" to "{project_name}"
-6. rename "hello_world.code-workspace" to "{project_name}.code-workspace"
-7. edit "{project_name}.code-workspace" with a text editor
+1. rename the folder containing all files with your project name (referred to as {project_name})
+1. navigate into the folder
+1. delete the folder `./.git` (it might be a hidden folder)
+1. rename the folder `hello_world` to `{project_name}`
+1. rename `hello_world.code-workspace` to `{project_name}.code-workspace`
+1. edit `{project_name}.code-workspace` with a text editor
    - search for the "path" variable
-   - replace "hello_world" with "{project_name}"
-8. go into the folder {project_name}
-9. step out of the current folder and launch {project_name}.code-workspace (with VS Code)
+   - replace `hello_world` with `{project_name}`
+1. step out of the current folder and launch {project_name}.code-workspace (with VS Code)
 
 The following steps can be made within VS Code
-10.  rename all "hello_world".cpp and "hello_world".h files with your {project_name} if necessary, if you do so, pay attention to the next step
-11.  every C/C++ source file (.cpp or .cc) needs to be listed in the `target_sources()` command inside the "CMakeLists.txt" file, see at EOF (end of file)
-12.  open "CMakeLists.txt"
-    - search for the `project()` command (line 21) and replace "hello_world" with {project_name}
+
+9.  open `CMakeLists.txt`
+    - search for the `project()` command and replace `hello_world` with `{project_name}`
+9.  rename all file names containing `hello_world` with your `{project_name}` if necessary, if you do so, pay attention to the next step
+9.  every C/C++ source file (.cpp or .cc) needs to be listed in the `target_sources()` command inside the `CMakeLists.txt` file, see at end of file
 
 >[!NOTE]
-> after changing a CMake file, it is important to __Reconfigure__ using the CMake extension
+> After changing a CMake file, it is important to __Reconfigure__ using the CMake extension.
 
 You are ready to start!
 
@@ -140,7 +147,7 @@ You are ready to start!
     - to view messages sent via `debug_printf()` use the "Serial Monitor" VS Code extension by Microsoft
 - after compiling, a memory map is printed to the OUTPUT window of VS Code
   - it is absolutely fine for the "STACK %age Used" to be 100%
-  - to increase the stack size, open and edit "{project_name}/device/device_config.h"
+  - to increase the stack size, open and edit `{project_name}/device/device_config.h`
 
 
 
