@@ -18,6 +18,13 @@ This project is for the Visual Studio Code IDE. It therefore needs to be install
 Official Website: https://code.visualstudio.com/
 
 
+### recommended extensions
+- cpptools-extension-pack (by ms-vscode)
+- cmake-tools (by ms-vscode)
+- vscode-serial-monitor (by ms-vscode)
+- cortex-debug (by marus25)
+
+
 
 ## Manual downloads and installation
 ### Windows
